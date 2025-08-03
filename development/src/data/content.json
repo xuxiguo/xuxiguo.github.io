@@ -15,7 +15,7 @@
     "location": "Saint Louis, MO 63108",
     "email": "norman.guo@slu.edu",
     "profileImage": "assets/img/profile.jpg",
-    "cv": "pdf/Normanguo.pdf"
+    "cv": "assets/pdf/Normanguo.pdf"
   },
   "about": {
     "description": "I am an Assistant Professor of Finance at Saint Loius University. My research broadly focuses on FinTech, Machine Learning, Investment, and Corporate Finance, with a particular interest in uncovering hidden patterns on mutual funds, hedge funds, and financial analysts using explainable machine learning models.",
@@ -101,8 +101,8 @@
       },
       {
         "title": "Decoding Mutual Fund Performance: Dynamic Return Patterns via Deep Learning",
-        "paperUrl": "pdf/JMP_Machine_Learning_Mutual_Fund.pdf",
-        "slideUrl": "pdf/Decoding Mutual Fund Performance.pptx",
+        "paperUrl": "assets/pdf/JMP_Machine_Learning_Mutual_Fund.pdf",
+        "slideUrl": "assets/pdf/Decoding Mutual Fund Performance.pptx",
         "presentations": "FMA, SFA, Economics of Financial Technology Conference, Atlanta Rising Scholar Symposium in Finance, MFA, Georgia State University, Saint Louis University, Hofstra University",
         "description": "I employ a state-of-the-art sequential deep learning model to understand and predict dynamic patterns in mutual fund returns. The model predicts sequences of future returns and offers interpretable insights. A long-short portfolio based on the model's prediction generates a 2.8% annualized Carhart 4-factor alpha, and this abnormal performance is persistent for up to four years. The model captures dynamic features of mutual fund strategies related to company fundamentals and macroeconomic states. Fund returns are most informative when they happen after earnings announcements for stocks held by the funds. Historical performance and macroeconomic variables are the most important determinants of future fund return patterns and performance."
       },
@@ -122,7 +122,7 @@
             "url": "https://sites.google.com/view/baozhongyang/"
           }
         ],
-        "slideUrl": "pdf/ML_Hedge_Fund.pdf",
+        "slideUrl": "assets/pdf/ML_Hedge_Fund.pdf",
         "presentations": "Global Finance Association, FMA, SFA",
         "description": "We examine the impact of AI adoption on hedge fund performance and investment strategies. We find that AI adoption improves hedge fund performance by 2.64% annually. AI adoption also reduces fund risk and increases shape ratio and information ratio. The adoption of AI is associated with a greater number of holdings in the portfolio and less concentration in the local stocks."
       },
@@ -172,7 +172,7 @@
     "description": "Welcome to the exciting realm of Blockchain! Get ready for an adventure through the world of hashes, digital signatures, and mining. Let's explore some intriguing demos from my Blockchain class. Onward to Blockchain enlightenment!",
     "introPresentation": {
       "title": "Introduction of Blockchain and Cryptocurrencies",
-      "url": "pdf/Blockchain Introduction - AAII St Louis Chapter.pptx"
+      "url": "assets/pdf/Blockchain Introduction - AAII St Louis Chapter.pptx"
     },
     "demos": [
       {
