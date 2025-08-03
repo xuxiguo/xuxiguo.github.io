@@ -10,7 +10,10 @@
         "build:scss": "node scripts/build-scss.js",
         "clean": "node scripts/clean.js",
         "start": "npm run build && node scripts/start.js",
-        "start:debug": "npm run build && node scripts/start-debug.js"
+        "start:debug": "npm run build && node scripts/start-debug.js",
+        "validate": "node validate-content.js",
+        "setup": "node setup-dev.js",
+        "deploy": "node deploy.js"
     },
     "description": "Resume is a simple, yet elegant resume and CV theme for Bootstrap 4.",
     "keywords": [
