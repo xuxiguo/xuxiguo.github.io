@@ -79,7 +79,7 @@
     ],
     "workingPapers": [
       {
-        "title": "Can Machines Understand Human Decisions? Dissecting Stock Forecasting Skill",
+        "title": "Can Machines Understand Human Skills? Insights from Analyst Selection",
         "authors": [
           {
             "name": "Sean Cao",
@@ -101,6 +101,7 @@
       },
       {
         "title": "Decoding Mutual Fund Performance: Dynamic Return Patterns via Deep Learning",
+        "status": "Under review",
         "paperUrl": "assets/pdf/JMP_Machine_Learning_Mutual_Fund.pdf",
         "slideUrl": "assets/pdf/Decoding Mutual Fund Performance.pptx",
         "presentations": "FMA, SFA, Economics of Financial Technology Conference, Atlanta Rising Scholar Symposium in Finance, MFA, Georgia State University, Saint Louis University, Hofstra University",
@@ -109,10 +110,6 @@
       {
         "title": "The Impact of AI Adoption on Hedge Fund Performance",
         "authors": [
-          {
-            "name": "Vikas Agarwal",
-            "url": "https://sites.google.com/view/vikasagarwal"
-          },
           {
             "name": "Zhen Shi",
             "url": "https://sites.google.com/site/zhenshihome/"
@@ -134,6 +131,21 @@
     ]
   },
   "teaching": [
+    {
+      "course": "Introduction to Blockchain and Cryptocurrency",
+      "institution": "Saint Louis University",
+      "period": "2022 - Present"
+    },
+    {
+      "course": "Blockchain Technology, Cryptocurrency, & Business Disruption",
+      "institution": "Saint Louis University",
+      "period": "2022 - 2023"
+    },
+    {
+      "course": "Finance for Managers",
+      "institution": "Saint Louis University",
+      "period": "2023 - 2024"
+    },
     {
       "course": "Principles of Finance",
       "institution": "Saint Louis University",
