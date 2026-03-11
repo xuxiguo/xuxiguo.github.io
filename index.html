@@ -1,287 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Google tag (gtag.js)-->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GH2NM46B17"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', 'G-GH2NM46B17');
-        </script>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Assistant Professor of Finance at Saint Louis University specializing in FinTech, Machine Learning, and Investment" />
-        <meta name="author" content="Norman Guo" />
-        <title>Norman (Xuxi) Guo | SLU</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script async src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Google Tag Manager (noscript)-->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDTPCD6" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Xuxi (Norman) Guo</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="..." /></span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#research">Research</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#teaching">Teaching</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#blockchain">Blockchain Demo</a></li>
-                </ul>
+---
+layout: default
+is_home: true
+title: "Norman (Xuxi) Guo | SLU"
+---
+{% assign d = site.data.content %}
+<div class="container-fluid p-0">
+    <!-- About -->
+    <section class="resume-section" id="about">
+        <div class="resume-section-content">
+            <h1 class="mb-0">
+                {{ d.personal.firstName }}
+                <span class="text-primary">{{ d.personal.lastName }}</span>
+            </h1>
+            <div class="subheading mb-4">
+                {{ d.personal.institution }} &middot; {{ d.personal.location }} &middot;
+                <a href="mailto:{{ d.personal.email }}">{{ d.personal.email }}</a>
             </div>
-        </nav>
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-            <!-- About-->
-            <section class="resume-section" id="about">
-                <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        Norman
-                        <span class="text-primary">Guo</span>
-                    </h1>
-                    <div class="subheading mb-4">
-                        Saint Louis University · Saint Louis, MO 63108 ·
-                        <a href="mailto:norman.guo@slu.edu">norman.guo@slu.edu</a>
-                    </div>
-                    <p class="lead mb-3">I am an Assistant Professor of Finance at Saint Loius University. My research broadly focuses on FinTech, Machine Learning, Investment, and Corporate Finance, with a particular interest in uncovering hidden patterns on mutual funds, hedge funds, and financial analysts using explainable machine learning models.</p>
-                    <p class="subheading mb-0">Research Interest</p>
-                    <ul class="fa-ul mb-4">
-                        <li>
-                            <span class="fa-li"><i class="fas fa-angle-right"></i></span>
-                            FinTech: AI, Machine Learning, Deep Learning
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-angle-right"></i></span>
-                            Investments: Hedge Funds, Mutual Funds, Portfolio Managment
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-angle-right"></i></span>
-                            Corporate Finance: Financial Analysts
-                        </li>
-                    </ul>
-                    <p class="lead mb-5">
-                        Download Norman's
-                        <a href="assets/pdf/Normanguo.pdf">Curriculum Vitae</a>
-                    </p>
-                    <div class="social-icons">
-                        <a class="social-icon" href="https://github.com/xuxiguo"><i class="fab fa-github"></i></a>
-                        <a class="social-icon" href="https://www.linkedin.com/in/xuxiguo/"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="social-icon" href="https://www.researchgate.net/profile/Xuxi-Guo"><i class="fab fa-researchgate"></i></a>
-                        <a class="social-icon" href="https://scholar.google.com/citations?user=KtPLAWQAAAAJ&amp;hl=en"><i class="fab fa-google"></i></a>
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Research-->
-            <section class="resume-section" id="research">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Research</h2>
-                    <div class="mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-3">Publication</h3>
-                            <div class="subheading mb-0">Hedging Performance of Multiscale Hedge Ratios</div>
-                            <div class="mb-1">
-                                with
-                                <a href="https://faculty.bentley.edu/details.asp?uname=jsultan">Jahangir Sultan</a>
-                                ,
-                                <a href="https://scholar.google.co.uk/citations?user=QA0daNQAAAAJ&amp;hl=en">Antonios Alexandridis</a>
-                                ,
-                                <a href="https://www.kent.ac.uk/kent-business-school/people/senior-leadership-team/798/hasan-mohammad">Mohammad Hasan</a>
-                                , 2019,
-                                <b>Journal of Futures Markets</b>
-                            </div>
-                            <p>In this study, we combine the wavelet multiscale model and neural network to improve the hedging performance of multiple classes of assets over traditional hedging models.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-3">Working Paper</h3>
-                            <div class="subheading mb-1">
-                                Can Machines Understand Human Skills? Insights from Analyst Selection
-                                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4742174">[Paper]</a>
-                            </div>
-                            <div class="mb-1">
-                                with
-                                <a href="https://sites.google.com/view/seancao/home">Sean Cao</a>
-                                ,
-                                <a href="https://scholar.google.com/citations?user=JJnQE9sAAAAJ&amp;hl=en&amp;authuser=1">Houping Xiao</a>
-                                ,
-                                <a href="https://sites.google.com/view/baozhongyang/">Baozhong Yang</a>
-                            </div>
-                            <p>
-                                <i><b>• Revising for invited re-submission at Journal of Finance</b></i>
-                                <br />
-                                <i>
-                                    <b>Presentations:</b>
-                                    CICF, AsianFA Annual Conference, Hawaii Accounting Research Conference, MFA, FMA, SFA, Renmin University, Baruch College, Nankai University, Fudan University, University of Arizona, Georgia State University, University of Georgia, Iowa State University, University of Minnesota, Xiamen University, Huazhong University of Science and Technology, Beijing University, Atlanta PhD Consortium, Shanghai Jiaotong Univeristy, CHUK-Shenzhen
-                                </i>
-                            </p>
-                            <p style="padding-bottom: 30px">We use machine learning (ML) to provide a novel methodology to determine analysts' skills and effectively aggregate the forecasting opinions of analysts to form a crowd wisdom-based earnings forecast. Our machine-identified skilled analysts persistently outperform expert-picked star analysts. We find that machines rely on nonlinear interactions of analyst characteristics, such as past skill and efforts, to make predictions, unlike human experts, who lean more on relation-based information such as brokerage size.</p>
-                            <div class="subheading mb-1">
-                                Decoding Mutual Fund Performance: Dynamic Return Patterns via Deep Learning
-                                <a href="assets/pdf/JMP_Machine_Learning_Mutual_Fund.pdf">[Paper]</a>
-                                <a href="assets/pdf/Decoding Mutual Fund Performance.pptx">[Slide]</a>
-                            </div>
-                            <p>
-                                <i><b>• Under review</b></i>
-                                <br />
-                                <i>
-                                    <b>Presentations:</b>
-                                    FMA, SFA, Economics of Financial Technology Conference, Atlanta Rising Scholar Symposium in Finance, MFA, Georgia State University, Saint Louis University, Hofstra University
-                                </i>
-                            </p>
-                            <p style="padding-bottom: 30px">I employ a state-of-the-art sequential deep learning model to understand and predict dynamic patterns in mutual fund returns. The model predicts sequences of future returns and offers interpretable insights. A long-short portfolio based on the model's prediction generates a 2.8% annualized Carhart 4-factor alpha, and this abnormal performance is persistent for up to four years. The model captures dynamic features of mutual fund strategies related to company fundamentals and macroeconomic states. Fund returns are most informative when they happen after earnings announcements for stocks held by the funds. Historical performance and macroeconomic variables are the most important determinants of future fund return patterns and performance.</p>
-                            <div class="subheading mb-1">
-                                The Impact of AI Adoption on Hedge Fund Performance
-                                <a href="assets/pdf/ML_Hedge_Fund.pdf">[Slide]</a>
-                            </div>
-                            <div class="mb-1">
-                                with
-                                <a href="https://sites.google.com/site/zhenshihome/">Zhen Shi</a>
-                                ,
-                                <a href="https://sites.google.com/view/baozhongyang/">Baozhong Yang</a>
-                            </div>
-                            <p style="padding-bottom: 30px">We examine the impact of AI adoption on hedge fund performance and investment strategies. We find that AI adoption improves hedge fund performance by 2.64% annually. AI adoption also reduces fund risk and increases shape ratio and information ratio. The adoption of AI is associated with a greater number of holdings in the portfolio and less concentration in the local stocks.</p>
-                            <div class="subheading mb-1">Why do actively managed mutual funds hold ETFs? Evidence on liquidity management</div>
-                            <p style="padding-bottom: 30px">I find that investment managers in actively managed mutual funds trade exchange-traded funds (ETFs) for liquidity management. The results show that funds that do not use index ETFs exhibit lower returns when they experience fund flow. The performance of funds that use index ETFs, however, is independent of investor's liquidity demands.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Teaching-->
-            <section class="resume-section" id="teaching">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Teaching</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Introduction to Blockchain and Cryptocurrency</h3>
-                            <div class="subheading mb-3">Saint Louis University</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2022 - Present</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Blockchain Technology, Cryptocurrency, &amp; Business Disruption</h3>
-                            <div class="subheading mb-3">Saint Louis University</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2022 - 2023</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Finance for Managers</h3>
-                            <div class="subheading mb-3">Saint Louis University</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2023 - 2024</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Principles of Finance</h3>
-                            <div class="subheading mb-3">Saint Louis University</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2022 - Present</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Blockchain and business disruption</h3>
-                            <div class="subheading mb-3">Georgia State University</div>
-                            <p>This course provides an introduction to blockchain technology and its disruptive roles in business. Students will have hands-on and problem solving experiences that can be useful in blockchain applications and innovation.</p>
-                            <ul class="fa-ul mb-0">
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Fundamentals of Blockchain Technology
-                                </li>
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Blockchain and Business Disruption
-                                </li>
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Cryptocurrencies
-                                </li>
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Ethereum and Programming
-                                </li>
-                                <li>
-                                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                                    Blockchain Platforms
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2021 - 2022</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Corporate Finance</h3>
-                            <div class="subheading mb-3">Georgia State University</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2019 - 2022</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">CFA Exam</h3>
-                            <div class="subheading mb-3">Curriculum Lead and Lecturer, Utoollearning</div>
-                            <p>Design and teach the course of Quantitative Methods, Portfolio Management, and Equity Investments in the CFA Level I exam.</p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2015 - 2016</span></div>
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Interests-->
-            <section class="resume-section" id="interests">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Interests</h2>
-                    <p>In my personal time, I enjoy hiking with my family. I also enjoy running, cycling, and kayaking.</p>
-                    <p class="mb-0">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows. I am an aspiring chef, and I spend a lot of my free time exploring the latest technology advancements in Artificial Intelligence.</p>
-                </div>
-            </section>
-            <!-- Blockchain Demo-->
-            <section class="resume-section" id="blockchain">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Blockchain Intro Demo</h2>
-                    <p>Welcome to the exciting realm of Blockchain! Get ready for an adventure through the world of hashes, digital signatures, and mining. Let's explore some intriguing demos from my Blockchain class. Onward to Blockchain enlightenment!</p>
-                    <p class="mb-0"><a href="assets/pdf/Blockchain Introduction - AAII St Louis Chapter.pptx">Introduction of Blockchain and Cryptocurrencies</a></p>
-                    <ul class="fa-ul mb-0">
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            <a href="https://andersbrownworth.com/blockchain/hash">Blockchain Technology: Hash Function</a>
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            <a href="https://andersbrownworth.com/blockchain/public-private-keys/keys">Blockchain Technology: Digital Signature</a>
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            <a href="https://stefanhuber.github.io/proof-of-work/">Blockchain Technology: Mining</a>
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check"></i></span>
-                            <a href="https://coindemo.io/">Bitcoin Demo</a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+            <p class="lead mb-3">{{ d.about.description }}</p>
+            <p class="subheading mb-0">Research Interest</p>
+            <ul class="fa-ul mb-4">
+                {% for interest in d.about.researchInterests %}
+                <li>
+                    <span class="fa-li"><i class="fas fa-angle-right"></i></span>
+                    {{ interest }}
+                </li>
+                {% endfor %}
+            </ul>
+            <p class="lead mb-5">
+                Download Norman's
+                <a href="{{ d.personal.cv }}">Curriculum Vitae</a>
+            </p>
+            <div class="social-icons">
+                {% for social in d.socialLinks %}
+                <a class="social-icon" href="{{ social.url }}"><i class="{{ social.icon }}"></i></a>
+                {% endfor %}
+            </div>
         </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
-</html>
+    </section>
+    <hr class="m-0" />
+    <!-- Research -->
+    <section class="resume-section" id="research">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Research</h2>
+            <div class="mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-3">Publication</h3>
+                    {% for pub in d.research.publications %}
+                    <div class="subheading mb-0">{{ pub.title }}</div>
+                    <div class="mb-1">
+                        with
+                        {% for author in pub.authors %}{% if forloop.index > 1 %}, {% endif %}<a href="{{ author.url }}">{{ author.name }}</a>{% endfor %}, {{ pub.year }},
+                        <b>{{ pub.journal }}</b>
+                    </div>
+                    <p>{{ pub.description }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-3">Working Paper</h3>
+                    {% for paper in d.research.workingPapers %}
+                    <div class="subheading mb-1">
+                        {{ paper.title }}
+                        {% if paper.paperUrl %} <a href="{{ paper.paperUrl }}">[Paper]</a>{% endif %}
+                    </div>
+                    {% if paper.authors %}
+                    <div class="mb-1">
+                        with
+                        {% for author in paper.authors %}{% if forloop.index > 1 %}, {% endif %}<a href="{{ author.url }}">{{ author.name }}</a>{% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if paper.status %}
+                    <p><i><b>&bull; {{ paper.status }}</b></i></p>
+                    {% endif %}
+                    <p style="padding-bottom:30px">{{ paper.description }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Teaching -->
+    <section class="resume-section" id="teaching">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Teaching</h2>
+            {% for course in d.teaching %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">{{ course.course }}</h3>
+                    <div class="subheading mb-3">{{ course.institution }}</div>
+                    {% if course.description %}
+                    <p>{{ course.description }}</p>
+                    {% endif %}
+                    {% if course.topics %}
+                    <ul class="fa-ul mb-0">
+                        {% for topic in course.topics %}
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            {{ topic }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="flex-shrink-0"><span class="text-primary">{{ course.period }}</span></div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Interests -->
+    <section class="resume-section" id="interests">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Interests</h2>
+            <p>{{ d.interests.outdoor }}</p>
+            <p class="mb-0">{{ d.interests.indoor }}</p>
+        </div>
+    </section>
+    <!-- Blockchain Demo -->
+    <section class="resume-section" id="blockchain">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Blockchain Intro Demo</h2>
+            <p>{{ d.blockchain.description }}</p>
+            <p class="mb-0"><a href="{{ d.blockchain.introPresentation.url }}">{{ d.blockchain.introPresentation.title }}</a></p>
+            <ul class="fa-ul mb-0">
+                {% for demo in d.blockchain.demos %}
+                <li>
+                    <span class="fa-li"><i class="fas fa-check"></i></span>
+                    <a href="{{ demo.url }}">{{ demo.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</div>

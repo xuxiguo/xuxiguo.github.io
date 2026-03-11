@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.data.content.meta.googleAnalyticsId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', '{{ site.data.content.meta.googleAnalyticsId }}');
+        </script>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="{{ page.description | default: site.data.content.meta.description }}" />
+        <meta name="author" content="{{ site.data.content.meta.author }}" />
+        <title>{{ page.title | default: site.data.content.meta.title }}</title>
+        <link rel="icon" type="image/x-icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" />
+        <!-- Font Awesome icons (free version) -->
+        <script async src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap) -->
+        <link href="{{ '/css/styles.css' | relative_url }}" rel="stylesheet" />
+        {% if page.layout == 'post' or page.is_blog %}
+        <style>
+            .blog-content { max-width: 800px; }
+            .blog-content h1 { font-size: 2.5rem; text-transform: none; }
+            .blog-content h2, .blog-content h3 { text-transform: none; }
+            .blog-meta { color: #6c757d; margin-bottom: 2rem; }
+            .blog-body { font-size: 1.1rem; line-height: 1.8; }
+            .blog-body h2, .blog-body h3 { text-transform: none; }
+            .back-link { margin-bottom: 1rem; }
+            .blog-list-title { text-transform: none; }
+        </style>
+        {% endif %}
+    </head>
+    <body id="page-top">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.data.content.meta.googleTagManagerId }}" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand{% if page.is_home %} js-scroll-trigger{% endif %}" href="{% if page.is_home %}#page-top{% else %}{{ '/' | relative_url }}{% endif %}">
+                <span class="d-block d-lg-none">{{ site.data.content.personal.displayName }}</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ '/' | relative_url }}{{ site.data.content.personal.profileImage }}" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    {% for item in site.data.content.navigation %}
+                    <li class="nav-item">
+                        {% if page.is_home %}
+                        <a class="nav-link js-scroll-trigger" href="#{{ item.id }}">{{ item.label }}</a>
+                        {% else %}
+                        <a class="nav-link" href="{{ '/' | relative_url }}#{{ item.id }}">{{ item.label }}</a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if page.is_blog or page.layout == 'post' %} active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content -->
+        {{ content }}
+        <!-- Bootstrap core JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS -->
+        <script src="{{ '/js/scripts.js' | relative_url }}"></script>
+    </body>
+</html>
