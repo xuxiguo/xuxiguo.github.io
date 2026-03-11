@@ -46,7 +46,10 @@ title: "Norman (Xuxi) Guo | SLU"
                 <div class="flex-grow-1">
                     <h3 class="mb-3">Publication</h3>
                     {% for pub in d.research.publications %}
-                    <div class="subheading mb-0">{{ pub.title }}</div>
+                    <div class="subheading mb-0">
+                        {{ pub.title }}
+                        {% if pub.paperUrl %} <a href="{{ pub.paperUrl }}">[Paper]</a>{% endif %}
+                    </div>
                     <div class="mb-1">
                         with
                         {% for author in pub.authors %}{% if forloop.index > 1 %}, {% endif %}<a href="{{ author.url }}">{{ author.name }}</a>{% endfor %}, {{ pub.year }},
