@@ -81,6 +81,18 @@ research:
       status: "Forthcoming, Journal of Financial Stability"
       description: "I employ a state-of-the-art sequential deep learning model to understand and predict dynamic patterns in mutual fund returns. The model predicts sequences of future returns and offers interpretable insights. A long-short portfolio based on the model's prediction generates a 2.8% annualized Carhart 4-factor alpha, and this abnormal performance is persistent for up to four years. The model captures dynamic features of mutual fund strategies related to company fundamentals and macroeconomic states. Fund returns are most informative when they happen after earnings announcements for stocks held by the funds. Historical performance and macroeconomic variables are the most important determinants of future fund return patterns and performance."
 
+    - title: "Mapping the Midweek Mountain: The New Geography of Hybrid Work"
+      authors:
+        - name: "Wei Jiang"
+          url: "https://www.weijiang-finance.com/"
+        - name: "Yaswanth Pothuru"
+          url: "https://orcid.org/0009-0005-2180-5427"
+        - name: "Baozhong Yang"
+          url: "https://sites.google.com/view/baozhongyang/"
+      paperUrl: "assets/pdf/Remote_Work_Paper.pdf"
+      status: "Under submission"
+      description: "This paper provides a behavioral analysis of the post-pandemic transformation of work, using a dataset of approximately 41 billion mobile geolocation records from 73.5 million individuals in the five largest U.S. metropolitan areas. By tracking movements between corporate headquarters, residences, and other points of interest, we document a structural shift in work patterns characterized by a new 'midweek mountain' of office attendance on Tuesdays through Thursdays. Our data reveals that workers now allocate significantly more time to non-work locations during the workday, indicating a lasting transformation in the integration of personal and professional life."
+
     - title: "The Impact of AI Adoption on Hedge Fund Performance"
       authors:
         - name: "Zhen Shi"
