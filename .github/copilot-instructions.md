@@ -18,9 +18,22 @@ This is a Jekyll-based academic portfolio and blog hosted on GitHub Pages at htt
 
 ### Build & Deploy
 
-- **Local development**: `bundle exec jekyll serve`
+- **Local preview**: Run `node preview.js` to build and serve the site at http://localhost:4000. This uses LiquidJS + js-yaml to render Jekyll templates locally without Ruby.
+- **IMPORTANT**: Always preview locally and get user confirmation before pushing to GitHub.
 - **Deployment**: Push to `gh-pages` branch — GitHub Pages auto-builds
 - **No CI/CD pipeline needed** — GitHub Pages handles Jekyll builds natively
+
+### Workflow: Content Update → Preview → Push
+
+1. Edit `_data/content.yml` (or other content files)
+2. Run `node preview.js` to build and preview at http://localhost:4000
+3. User reviews the preview in browser
+4. Only after user confirms the preview looks correct, stage, commit, and push:
+   ```
+   git add -A
+   git commit -m "descriptive message"
+   git push origin gh-pages
+   ```
 
 ### Architecture
 

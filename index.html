@@ -51,8 +51,8 @@ title: "Norman (Xuxi) Guo | SLU"
                         {% if pub.paperUrl %} <a href="{{ pub.paperUrl }}">[Paper]</a>{% endif %}
                     </div>
                     <div class="mb-1">
-                        with
-                        {% for author in pub.authors %}{% if forloop.index > 1 %}, {% endif %}<a href="{{ author.url }}">{{ author.name }}</a>{% endfor %}, {{ pub.year }},
+                        {% if pub.authors %}with
+                        {% for author in pub.authors %}{% if forloop.index > 1 %}, {% endif %}<a href="{{ author.url }}">{{ author.name }}</a>{% endfor %}, {% endif %}{{ pub.year }},
                         <b>{{ pub.journal }}</b>
                     </div>
                     <p>{{ pub.description }}</p>

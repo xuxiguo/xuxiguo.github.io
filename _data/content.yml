@@ -14,7 +14,7 @@ personal:
   location: "Saint Louis, MO 63108"
   email: "norman.guo@slu.edu"
   profileImage: "assets/img/profile.jpg"
-  cv: "assets/pdf/Normanguo.pdf"
+  cv: "assets/pdf/Norman_Guo_CV_20260416.pdf"
 
 about:
   description: "I am an Assistant Professor of Finance at Saint Loius University. My research broadly focuses on FinTech, Machine Learning, Investment, and Corporate Finance, with a particular interest in uncovering hidden patterns on mutual funds, hedge funds, and financial analysts using explainable machine learning models."
@@ -64,6 +64,12 @@ research:
       paperUrl: "https://onlinelibrary.wiley.com/doi/abs/10.1002/fut.22047"
       description: "In this study, we combine the wavelet multiscale model and neural network to improve the hedging performance of multiple classes of assets over traditional hedging models."
 
+    - title: "Decoding Mutual Fund Performance: Dynamic Return Patterns via Deep Learning"
+      year: "2026"
+      journal: "Journal of Financial Stability"
+      paperUrl: "https://www.sciencedirect.com/science/article/pii/S1572308926000343"
+      description: "This paper uses a sequential deep learning model to uncover and predict dynamic patterns in mutual fund returns. A long-short portfolio based on the model generates a 2.8% annualized four-factor alpha that persists for up to four years."
+
   workingPapers:
     - title: "Can Machines Understand Human Skills? Insights from Analyst Selection"
       authors:
@@ -75,12 +81,7 @@ research:
           url: "https://sites.google.com/view/baozhongyang/"
       paperUrl: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4742174"
       status: "Revising for invited re-submission at Journal of Finance"
-      description: "We use machine learning (ML) to provide a novel methodology to determine analysts' skills and effectively aggregate the forecasting opinions of analysts to form a crowd wisdom-based earnings forecast. Our machine-identified skilled analysts persistently outperform expert-picked star analysts. We find that machines rely on nonlinear interactions of analyst characteristics, such as past skill and efforts, to make predictions, unlike human experts, who lean more on relation-based information such as brokerage size."
-
-    - title: "Decoding Mutual Fund Performance: Dynamic Return Patterns via Deep Learning"
-      paperUrl: "assets/pdf/JMP_Machine_Learning_Mutual_Fund.pdf"
-      status: "Forthcoming, Journal of Financial Stability"
-      description: "I employ a state-of-the-art sequential deep learning model to understand and predict dynamic patterns in mutual fund returns. The model predicts sequences of future returns and offers interpretable insights. A long-short portfolio based on the model's prediction generates a 2.8% annualized Carhart 4-factor alpha, and this abnormal performance is persistent for up to four years. The model captures dynamic features of mutual fund strategies related to company fundamentals and macroeconomic states. Fund returns are most informative when they happen after earnings announcements for stocks held by the funds. Historical performance and macroeconomic variables are the most important determinants of future fund return patterns and performance."
+      description: "We use machine learning to identify skilled financial analysts and aggregate their forecasts into a crowd wisdom-based earnings prediction. Machine-selected analysts persistently outperform expert-picked star analysts by leveraging nonlinear interactions of analyst characteristics rather than relation-based information."
 
     - title: "Mapping the Midweek Mountain: The New Geography of Hybrid Work"
       authors:
@@ -92,7 +93,7 @@ research:
           url: "https://sites.google.com/view/baozhongyang/"
       paperUrl: "assets/pdf/Remote_Work_Paper.pdf"
       status: "Under submission"
-      description: "This paper provides a behavioral analysis of the post-pandemic transformation of work, using a dataset of approximately 41 billion mobile geolocation records from 73.5 million individuals in the five largest U.S. metropolitan areas. By tracking movements between corporate headquarters, residences, and other points of interest, we document a structural shift in work patterns characterized by a new 'midweek mountain' of office attendance on Tuesdays through Thursdays. Our data reveals that workers now allocate significantly more time to non-work locations during the workday, indicating a lasting transformation in the integration of personal and professional life."
+      description: "Using 41 billion mobile geolocation records, we document a lasting post-pandemic shift in work patterns: a 'midweek mountain' of office attendance on Tuesdays through Thursdays, with workers spending significantly more time at non-work locations during the workday."
 
     - title: "The Impact of AI Adoption on Hedge Fund Performance"
       authors:
@@ -100,10 +101,16 @@ research:
           url: "https://sites.google.com/site/zhenshihome/"
         - name: "Baozhong Yang"
           url: "https://sites.google.com/view/baozhongyang/"
-      description: "We examine the impact of AI adoption on hedge fund performance and investment strategies. We find that AI adoption improves hedge fund performance by 2.64% annually. AI adoption also reduces fund risk and increases shape ratio and information ratio. The adoption of AI is associated with a greater number of holdings in the portfolio and less concentration in the local stocks."
+      description: "We examine how AI adoption affects hedge fund performance and find that it improves returns by 2.64% annually, reduces risk, and leads to more diversified portfolios with less concentration in local stocks."
+
+    - title: "The Vulnerability Trap: How Sudden Stops Erode Firm Financial Health Through Supply Chain Destruction"
+      authors:
+        - name: "Anqi Jiao"
+          url: "https://sites.google.com/site/anqijiao/home"
+      description: "We show that sudden stops in international capital flows destroy firms' supply chain networks, creating a vulnerability trap: financially fragile firms suffer the most network damage, which further weakens their financial health and amplifies exposure to future crises."
 
     - title: "Why do actively managed mutual funds hold ETFs? Evidence on liquidity management"
-      description: "I find that investment managers in actively managed mutual funds trade exchange-traded funds (ETFs) for liquidity management. The results show that funds that do not use index ETFs exhibit lower returns when they experience fund flow. The performance of funds that use index ETFs, however, is independent of investor's liquidity demands."
+      description: "This paper examines why actively managed mutual funds hold ETFs and finds they serve as a liquidity management tool. Funds using index ETFs maintain performance regardless of investor flow, while non-users suffer lower returns during redemptions."
 
 teaching:
   - course: "Introduction to Blockchain and Cryptocurrency"

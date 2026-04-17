@@ -1,14 +1,32 @@
 # Development dependencies
+node_modules/
 development/node_modules/
 development/dist/
+package-lock.json
+
+# Dev/build scripts (not needed for GitHub Pages)
+build.js
+deploy.js
+preview.js
+setup-dev.js
+validate-content.js
+edit-content.bat
+scripts/
+src/
+development/
+
+# Migration docs
+MIGRATION_COMPLETE.md
+
+# Editor / workspace files
+.vscode/settings.json
+.idea/
+website.code-workspace
+.specstory/
 
 # System files
 .DS_Store
 Thumbs.db
-
-# Editor files
-.vscode/settings.json
-.idea/
 
 # Temporary files
 *.tmp
