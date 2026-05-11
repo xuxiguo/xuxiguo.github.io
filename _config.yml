@@ -1,0 +1,48 @@
+# Site settings
+title: "Norman (Xuxi) Guo | SLU"
+description: "Assistant Professor of Finance at Saint Louis University specializing in FinTech, Machine Learning, and Investment"
+url: "https://xuxiguo.github.io"
+
+# GitHub Pages deploys from gh-pages branch
+baseurl: ""
+author: "Norman Guo"
+
+# Build settings
+markdown: kramdown
+permalink: /blog/:title/
+
+# Plugins (GitHub Pages compatible)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Exclude dev files from build
+exclude:
+  - development
+  - node_modules
+  - xuxiguo.github.io
+  - upload_to_youtube.py
+  - youtube_results.json
+  - youtube_token.json
+  - client_secrets.json
+  - build.js
+  - deploy.js
+  - setup-dev.js
+  - validate-content.js
+  - edit-content.bat
+  - EDIT-CONTENT.md
+  - MIGRATION_COMPLETE.md
+  - website.code-workspace
+  - README.md
+  - package.json
+  - Gemfile.lock
+  - scripts
+  - src

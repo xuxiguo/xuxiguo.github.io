@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "title": "Norman (Xuxi) Guo | SLU",
+    "description": "Assistant Professor of Finance at Saint Louis University specializing in FinTech, Machine Learning, and Investment",
+    "author": "Norman Guo",
+    "googleAnalyticsId": "G-GH2NM46B17",
+    "googleTagManagerId": "GTM-PDTPCD6"
+  },
+  "personal": {
+    "firstName": "Norman",
+    "lastName": "Guo",
+    "displayName": "Xuxi (Norman) Guo",
+    "title": "Assistant Professor of Finance",
+    "institution": "Saint Louis University",
+    "location": "Saint Louis, MO 63108",
+    "email": "norman.guo@slu.edu",
+    "profileImage": "assets/img/profile.jpg",
+    "cv": "assets/pdf/Normanguo.pdf"
+  },
+  "about": {
+    "description": "I am an Assistant Professor of Finance at Saint Loius University. My research broadly focuses on FinTech, Machine Learning, Investment, and Corporate Finance, with a particular interest in uncovering hidden patterns on mutual funds, hedge funds, and financial analysts using explainable machine learning models.",
+    "researchInterests": [
+      "FinTech: AI, Machine Learning, Deep Learning",
+      "Investments: Hedge Funds, Mutual Funds, Portfolio Managment",
+      "Corporate Finance: Financial Analysts"
+    ]
+  },
+  "socialLinks": [
+    {
+      "platform": "github",
+      "url": "https://github.com/xuxiguo",
+      "icon": "fab fa-github"
+    },
+    {
+      "platform": "linkedin",
+      "url": "https://www.linkedin.com/in/xuxiguo/",
+      "icon": "fab fa-linkedin-in"
+    },
+    {
+      "platform": "researchgate",
+      "url": "https://www.researchgate.net/profile/Xuxi-Guo",
+      "icon": "fab fa-researchgate"
+    },
+    {
+      "platform": "google-scholar",
+      "url": "https://scholar.google.com/citations?user=KtPLAWQAAAAJ&hl=en",
+      "icon": "fab fa-google"
+    }
+  ],
+  "navigation": [
+    { "id": "about", "label": "About" },
+    { "id": "research", "label": "Research" },
+    { "id": "teaching", "label": "Teaching" },
+    { "id": "interests", "label": "Interests" },
+    { "id": "blockchain", "label": "Blockchain Demo" }
+  ],
+  "research": {
+    "publications": [
+      {
+        "title": "Hedging Performance of Multiscale Hedge Ratios",
+        "authors": [
+          {
+            "name": "Jahangir Sultan",
+            "url": "https://faculty.bentley.edu/details.asp?uname=jsultan"
+          },
+          {
+            "name": "Antonios Alexandridis", 
+            "url": "https://scholar.google.co.uk/citations?user=QA0daNQAAAAJ&hl=en"
+          },
+          {
+            "name": "Mohammad Hasan",
+            "url": "https://www.kent.ac.uk/kent-business-school/people/senior-leadership-team/798/hasan-mohammad"
+          }
+        ],
+        "year": "2019",
+        "journal": "Journal of Futures Markets",
+        "description": "In this study, we combine the wavelet multiscale model and neural network to improve the hedging performance of multiple classes of assets over traditional hedging models."
+      }
+    ],
+    "workingPapers": [
+      {
+        "title": "Can Machines Understand Human Skills? Insights from Analyst Selection",
+        "authors": [
+          {
+            "name": "Sean Cao",
+            "url": "https://sites.google.com/view/seancao/home"
+          },
+          {
+            "name": "Houping Xiao",
+            "url": "https://scholar.google.com/citations?user=JJnQE9sAAAAJ&hl=en&authuser=1"
+          },
+          {
+            "name": "Baozhong Yang",
+            "url": "https://sites.google.com/view/baozhongyang/"
+          }
+        ],
+        "paperUrl": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4742174",
+        "status": "Revising for invited re-submission at Journal of Finance",
+        "presentations": "CICF, AsianFA Annual Conference, Hawaii Accounting Research Conference, MFA, FMA, SFA, Renmin University, Baruch College, Nankai University, Fudan University, University of Arizona, Georgia State University, University of Georgia, Iowa State University, University of Minnesota, Xiamen University, Huazhong University of Science and Technology, Beijing University, Atlanta PhD Consortium, Shanghai Jiaotong Univeristy, CHUK-Shenzhen",
+        "description": "We use machine learning (ML) to provide a novel methodology to determine analysts' skills and effectively aggregate the forecasting opinions of analysts to form a crowd wisdom-based earnings forecast. Our machine-identified skilled analysts persistently outperform expert-picked star analysts. We find that machines rely on nonlinear interactions of analyst characteristics, such as past skill and efforts, to make predictions, unlike human experts, who lean more on relation-based information such as brokerage size."
+      },
+      {
+        "title": "Decoding Mutual Fund Performance: Dynamic Return Patterns via Deep Learning",
+        "status": "Under review",
+        "paperUrl": "assets/pdf/JMP_Machine_Learning_Mutual_Fund.pdf",
+        "slideUrl": "assets/pdf/Decoding Mutual Fund Performance.pptx",
+        "presentations": "FMA, SFA, Economics of Financial Technology Conference, Atlanta Rising Scholar Symposium in Finance, MFA, Georgia State University, Saint Louis University, Hofstra University",
+        "description": "I employ a state-of-the-art sequential deep learning model to understand and predict dynamic patterns in mutual fund returns. The model predicts sequences of future returns and offers interpretable insights. A long-short portfolio based on the model's prediction generates a 2.8% annualized Carhart 4-factor alpha, and this abnormal performance is persistent for up to four years. The model captures dynamic features of mutual fund strategies related to company fundamentals and macroeconomic states. Fund returns are most informative when they happen after earnings announcements for stocks held by the funds. Historical performance and macroeconomic variables are the most important determinants of future fund return patterns and performance."
+      },
+      {
+        "title": "The Impact of AI Adoption on Hedge Fund Performance",
+        "authors": [
+          {
+            "name": "Zhen Shi",
+            "url": "https://sites.google.com/site/zhenshihome/"
+          },
+          {
+            "name": "Baozhong Yang",
+            "url": "https://sites.google.com/view/baozhongyang/"
+          }
+        ],
+        "slideUrl": "assets/pdf/ML_Hedge_Fund.pdf",
+        "presentations": "Global Finance Association, FMA, SFA",
+        "description": "We examine the impact of AI adoption on hedge fund performance and investment strategies. We find that AI adoption improves hedge fund performance by 2.64% annually. AI adoption also reduces fund risk and increases shape ratio and information ratio. The adoption of AI is associated with a greater number of holdings in the portfolio and less concentration in the local stocks."
+      },
+      {
+        "title": "Why do actively managed mutual funds hold ETFs? Evidence on liquidity management",
+        "presentations": "FMA, Georgia State University",
+        "description": "I find that investment managers in actively managed mutual funds trade exchange-traded funds (ETFs) for liquidity management. The results show that funds that do not use index ETFs exhibit lower returns when they experience fund flow. The performance of funds that use index ETFs, however, is independent of investor's liquidity demands."
+      }
+    ]
+  },
+  "teaching": [
+    {
+      "course": "Introduction to Blockchain and Cryptocurrency",
+      "institution": "Saint Louis University",
+      "period": "2022 - Present"
+    },
+    {
+      "course": "Blockchain Technology, Cryptocurrency, & Business Disruption",
+      "institution": "Saint Louis University",
+      "period": "2022 - 2023"
+    },
+    {
+      "course": "Finance for Managers",
+      "institution": "Saint Louis University",
+      "period": "2023 - 2024"
+    },
+    {
+      "course": "Principles of Finance",
+      "institution": "Saint Louis University",
+      "period": "2022 - Present"
+    },
+    {
+      "course": "Blockchain and business disruption",
+      "institution": "Georgia State University",
+      "period": "2021 - 2022",
+      "description": "This course provides an introduction to blockchain technology and its disruptive roles in business. Students will have hands-on and problem solving experiences that can be useful in blockchain applications and innovation.",
+      "topics": [
+        "Fundamentals of Blockchain Technology",
+        "Blockchain and Business Disruption",
+        "Cryptocurrencies",
+        "Ethereum and Programming",
+        "Blockchain Platforms"
+      ]
+    },
+    {
+      "course": "Corporate Finance",
+      "institution": "Georgia State University",
+      "period": "2019 - 2022"
+    },
+    {
+      "course": "CFA Exam",
+      "institution": "Curriculum Lead and Lecturer, Utoollearning",
+      "period": "2015 - 2016",
+      "description": "Design and teach the course of Quantitative Methods, Portfolio Management, and Equity Investments in the CFA Level I exam."
+    }
+  ],
+  "interests": {
+    "outdoor": "In my personal time, I enjoy hiking with my family. I also enjoy running, cycling, and kayaking.",
+    "indoor": "When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows. I am an aspiring chef, and I spend a lot of my free time exploring the latest technology advancements in Artificial Intelligence."
+  },
+  "blockchain": {
+    "description": "Welcome to the exciting realm of Blockchain! Get ready for an adventure through the world of hashes, digital signatures, and mining. Let's explore some intriguing demos from my Blockchain class. Onward to Blockchain enlightenment!",
+    "introPresentation": {
+      "title": "Introduction of Blockchain and Cryptocurrencies",
+      "url": "assets/pdf/Blockchain Introduction - AAII St Louis Chapter.pptx"
+    },
+    "demos": [
+      {
+        "title": "Blockchain Technology: Hash Function",
+        "url": "https://andersbrownworth.com/blockchain/hash"
+      },
+      {
+        "title": "Blockchain Technology: Digital Signature",
+        "url": "https://andersbrownworth.com/blockchain/public-private-keys/keys"
+      },
+      {
+        "title": "Blockchain Technology: Mining",
+        "url": "https://stefanhuber.github.io/proof-of-work/"
+      },
+      {
+        "title": "Bitcoin Demo",
+        "url": "https://coindemo.io/"
+      }
+    ]
+  }
+}

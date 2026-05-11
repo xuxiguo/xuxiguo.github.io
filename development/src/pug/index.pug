@@ -1,0 +1,191 @@
+doctype html
+html(lang='en')
+
+    head
+        // Google tag (gtag.js)
+        script(async src=`https://www.googletagmanager.com/gtag/js?id=${data.meta.googleAnalyticsId}`)
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '#{data.meta.googleAnalyticsId}');
+
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        meta(name='description', content=data.meta.description)
+        meta(name='author', content=data.meta.author)
+
+        title= data.meta.title
+
+        link(rel='icon', type='image/x-icon', href='assets/img/favicon.ico')
+
+        // Font Awesome icons (free version)
+        script(async src='https://use.fontawesome.com/releases/v5.15.3/js/all.js', crossorigin='anonymous')
+
+        // Google fonts
+        link(href='https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700', rel='stylesheet', type='text/css')
+        link(href='https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i', rel='stylesheet', type='text/css')
+
+        // Core theme CSS (includes Bootstrap)
+        link(href='css/styles.css', rel='stylesheet')
+
+    body#page-top
+        // Google Tag Manager (noscript)
+        noscript
+            iframe(src=`https://www.googletagmanager.com/ns.html?id=${data.meta.googleTagManagerId}`, height='0', width='0', style='display:none;visibility:hidden')
+
+        // Navigation
+        nav#sideNav.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top
+            a.navbar-brand.js-scroll-trigger(href='#page-top')
+                span.d-block.d-lg-none= data.personal.displayName
+                span.d-none.d-lg-block
+                    img.img-fluid.img-profile.rounded-circle.mx-auto.mb-2(src=data.personal.profileImage, alt='...')
+            button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarResponsive.collapse.navbar-collapse
+                ul.navbar-nav
+                    each navItem in data.navigation
+                        li.nav-item
+                            a.nav-link.js-scroll-trigger(href=`#${navItem.id}`)= navItem.label
+
+        // Page Content
+        .container-fluid.p-0
+
+            // About
+            section#about.resume-section
+                .resume-section-content
+                    h1.mb-0
+                        = data.personal.firstName
+                        | 
+                        span.text-primary= data.personal.lastName
+                    .subheading.mb-4
+                        = `${data.personal.institution} · ${data.personal.location} · `
+                        a(href=`mailto:${data.personal.email}`)= data.personal.email
+                    p.lead.mb-3= data.about.description
+                    
+                    p.subheading.mb-0 Research Interest
+                    ul.fa-ul.mb-4
+                        each interest in data.about.researchInterests
+                            li
+                                span.fa-li
+                                    i.fas.fa-angle-right
+                                = interest
+
+                    p.lead.mb-5
+                        | Download Norman's 
+                        a(href=data.personal.cv) Curriculum Vitae
+                    
+                    .social-icons
+                        each social in data.socialLinks
+                            a.social-icon(href=social.url)
+                                i(class=social.icon)
+
+            hr.m-0
+
+            // Research
+            section#research.resume-section
+                .resume-section-content
+                    h2.mb-5 Research
+                    
+                    .mb-5
+                        .flex-grow-1
+                            h3.mb-3 Publication
+                            each pub in data.research.publications
+                                .subheading.mb-0= pub.title
+                                .mb-1
+                                    | with 
+                                    each author, index in pub.authors
+                                        if index > 0
+                                            | , 
+                                        a(href=author.url)= author.name
+                                    | , #{pub.year}, 
+                                    b= pub.journal
+                                p= pub.description
+
+                    .d-flex.flex-column.flex-md-row.justify-content-between.mb-5
+                        .flex-grow-1
+                            h3.mb-3 Working Paper
+                            
+                            each paper in data.research.workingPapers
+                                .subheading.mb-1
+                                    = paper.title
+                                    if paper.paperUrl
+                                        |  
+                                        a(href=paper.paperUrl) [Paper]
+                                    if paper.slideUrl
+                                        |  
+                                        a(href=paper.slideUrl) [Slide]
+                                
+                                if paper.authors && paper.authors.length > 0
+                                    .mb-1
+                                        | with 
+                                        each author, index in paper.authors
+                                            if index > 0
+                                                | , 
+                                            a(href=author.url)= author.name
+                                
+                                if paper.status
+                                    p
+                                        i
+                                            b= `• ${paper.status}`
+                                        br
+                                        if paper.presentations
+                                            i
+                                                b Presentations: 
+                                                = paper.presentations
+                                
+                                p(style='padding-bottom:30px')= paper.description
+
+            hr.m-0
+
+            // Teaching
+            section#teaching.resume-section
+                .resume-section-content
+                    h2.mb-5 Teaching
+
+                    each course in data.teaching
+                        .d-flex.flex-column.flex-md-row.justify-content-between.mb-5
+                            .flex-grow-1
+                                h3.mb-0= course.course
+                                .subheading.mb-3= course.institution
+                                if course.description
+                                    p= course.description
+                                if course.topics
+                                    ul.fa-ul.mb-0
+                                        each topic in course.topics
+                                            li
+                                                span.fa-li
+                                                    i.fas.fa-check
+                                                = topic
+                            .flex-shrink-0
+                                span.text-primary= course.period
+
+            hr.m-0
+
+            // Interests
+            section#interests.resume-section
+                .resume-section-content
+                    h2.mb-5 Interests
+                    p= data.interests.outdoor
+                    p.mb-0= data.interests.indoor
+
+            // Blockchain Demo
+            section#blockchain.resume-section
+                .resume-section-content
+                    h2.mb-5 Blockchain Intro Demo
+                    p= data.blockchain.description
+                    p.mb-0
+                        a(href=data.blockchain.introPresentation.url)= data.blockchain.introPresentation.title
+
+                    ul.fa-ul.mb-0
+                        each demo in data.blockchain.demos
+                            li
+                                span.fa-li
+                                    i.fas.fa-check
+                                a(href=demo.url)= demo.title
+
+        // Bootstrap core JS
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js')
+
+        // Core theme JS
+        script(src='js/scripts.js')
