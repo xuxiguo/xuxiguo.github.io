@@ -44,8 +44,6 @@ navigation:
     label: "Research"
   - id: "teaching"
     label: "Teaching"
-  - id: "interests"
-    label: "Interests"
   - id: "cases"
     label: "Blockchain Cases"
 
