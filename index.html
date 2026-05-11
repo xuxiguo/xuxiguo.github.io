@@ -120,17 +120,95 @@ title: "Norman (Xuxi) Guo | SLU"
             <p class="mb-0">{{ d.interests.indoor }}</p>
         </div>
     </section>
-    <!-- Blockchain Demo -->
-    <section class="resume-section" id="blockchain">
+    <!-- Blockchain Cases -->
+    <section class="resume-section" id="cases">
         <div class="resume-section-content">
-            <h2 class="mb-5">Blockchain Intro Demo</h2>
-            <p>{{ d.blockchain.description }}</p>
-            <p class="mb-0"><a href="{{ d.blockchain.introPresentation.url }}">{{ d.blockchain.introPresentation.title }}</a></p>
+            <h2 class="mb-3">{{ d.cases.intro.heading }}</h2>
+            <p class="subheading mb-4">{{ d.cases.intro.tagline }}</p>
+            <p class="lead mb-4">{{ d.cases.intro.description }}</p>
+
+            <div class="row g-4 mb-5">
+                {% for pillar in d.cases.intro.pillars %}
+                <div class="col-md-4">
+                    <div class="case-pillar h-100 p-3">
+                        <div class="case-pillar-icon mb-2"><i class="{{ pillar.icon }}"></i></div>
+                        <h5 class="mb-2">{{ pillar.title }}</h5>
+                        <p class="mb-0 text-muted">{{ pillar.text }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Single unified table: year-section rows + project accordion rows -->
+            <div class="case-unified-card">
+                <div class="accordion" id="acc-all">
+                    {% for cohort in d.cases.cohorts %}
+
+                    <!-- Year section header row -->
+                    <div class="case-year-row d-flex align-items-center justify-content-between px-4 py-2">
+                        <span class="case-year-row-title">{{ cohort.term }}</span>
+                        <span class="case-year-row-meta">
+                            {% assign wcount = cohort.winners | size %}
+                            {{ cohort.projects | size }}&nbsp;ventures&ensp;&middot;&ensp;{{ wcount }}&nbsp;winner{% if wcount != 1 %}s{% endif %}
+                        </span>
+                    </div>
+
+                    {% for p in cohort.projects %}
+                    {% assign is_winner = false %}
+                    {% for w in cohort.winners %}{% if w == p.slug %}{% assign is_winner = true %}{% endif %}{% endfor %}
+                    <div class="accordion-item{% if is_winner %} is-winner{% endif %}" id="case-{{ cohort.year }}-{{ p.slug }}">
+                        <h2 class="accordion-header" id="head-{{ cohort.year }}-{{ p.slug }}">
+                            <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#body-{{ cohort.year }}-{{ p.slug }}"
+                                aria-expanded="false"
+                                aria-controls="body-{{ cohort.year }}-{{ p.slug }}">
+                                <span class="case-trophy-col text-center">{% if is_winner %}<i class="fas fa-trophy"></i>{% endif %}</span>
+                                <span class="case-col-name case-name">{{ p.name }}</span>
+                                <span class="case-col-tagline case-tagline text-muted d-none d-md-inline">&mdash;&nbsp;{{ p.tagline }}</span>
+                            </button>
+                        </h2>
+                        <div id="body-{{ cohort.year }}-{{ p.slug }}" class="accordion-collapse collapse"
+                             aria-labelledby="head-{{ cohort.year }}-{{ p.slug }}"
+                             data-bs-parent="#acc-all">
+                            <div class="accordion-body">
+                                <p>{{ p.description }}</p>
+
+                                {% if p.video %}
+                                <div class="ratio ratio-16x9 mb-3 case-media">
+                                    <video controls preload="metadata" src="{{ p.video | relative_url }}"></video>
+                                </div>
+                                {% elsif p.videoEmbed and p.videoEmbed != "" %}
+                                <div class="ratio ratio-16x9 mb-3 case-media">
+                                    <iframe src="{{ p.videoEmbed }}?rel=0" title="{{ p.name }} presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                {% else %}
+                                <div class="case-media-placeholder mb-3">
+                                    <i class="fas fa-video-slash me-2"></i>Video coming soon
+                                </div>
+                                {% endif %}
+
+                                <div class="case-downloads">
+                                    {% if p.report %}<a class="btn btn-sm btn-outline-primary me-2 mb-2" href="{{ p.report | relative_url }}" download><i class="fas fa-file-alt me-1"></i> Final Report</a>{% endif %}
+                                    {% if p.slides %}<a class="btn btn-sm btn-outline-primary me-2 mb-2" href="{{ p.slides | relative_url }}" download><i class="fas fa-file-powerpoint me-1"></i> Presentation</a>{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr class="my-5"/>
+            <h3 class="mb-3">{{ d.cases.resources.title }}</h3>
+            <p class="mb-2"><a href="{{ d.cases.resources.introPresentation.url | relative_url }}"><i class="fas fa-file-powerpoint me-1"></i>{{ d.cases.resources.introPresentation.title }}</a></p>
             <ul class="fa-ul mb-0">
-                {% for demo in d.blockchain.demos %}
+                {% for demo in d.cases.resources.demos %}
                 <li>
-                    <span class="fa-li"><i class="fas fa-check"></i></span>
-                    <a href="{{ demo.url }}">{{ demo.title }}</a>
+                    <span class="fa-li"><i class="fas fa-external-link-alt"></i></span>
+                    <a href="{{ demo.url }}" target="_blank" rel="noopener">{{ demo.title }}</a>
                 </li>
                 {% endfor %}
             </ul>

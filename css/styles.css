@@ -11420,3 +11420,126 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+/* ============================================================
+   Blockchain Cases section
+   ============================================================ */
+#cases .case-pillar {
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    background: #fafafa;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+#cases .case-pillar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+#cases .case-pillar-icon {
+    font-size: 1.75rem;
+    color: var(--bs-primary);
+}
+#cases .case-cohort h3 {
+    color: var(--bs-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+/* Legacy: cohort h3 outside the header (no longer used but harmless) */
+#cases .case-cohort > h3 {
+    color: var(--bs-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+/* ── Unified table card ───────────────────────────── */
+#cases .case-unified-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+/* Year-section header row (inline divider inside table) */
+#cases .case-year-row {
+    background: var(--bs-primary);
+    color: #fff;
+}
+#cases .case-year-row-title {
+    font-family: "Saira Extra Condensed", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+#cases .case-year-row-meta {
+    font-size: 0.78rem;
+    opacity: 0.85;
+}
+/* Shared column widths — accordion buttons */
+#cases .case-trophy-col {
+    width: 28px;
+    flex-shrink: 0;
+    text-align: center;
+    color: #e9a825;
+    font-size: 0.85rem;
+}
+#cases .case-col-name {
+    flex: 0 0 180px;
+    min-width: 0;
+}
+#cases .case-col-tagline {
+    flex: 1;
+    min-width: 0;
+}
+/* Winner row highlight */
+#cases .accordion-item.is-winner {
+    background: #fffaf7;
+}
+/* Remove rounded corners on accordion items inside the card */
+#cases .case-unified-card .accordion-item {
+    border-radius: 0 !important;
+    border-left: none;
+    border-right: none;
+}
+#cases .case-unified-card .accordion-item:first-of-type,
+#cases .case-unified-card .accordion-item:last-child {
+    border-radius: 0 !important;
+}
+#cases .accordion-button {
+    font-family: "Saira Extra Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+#cases .accordion-button:not(.collapsed) {
+    background: #fbf3ef;
+    color: var(--bs-primary);
+    box-shadow: none;
+}
+#cases .accordion-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(189, 93, 56, 0.15);
+    border-color: rgba(189, 93, 56, 0.4);
+}
+#cases .case-name {
+    font-size: 1.2rem;
+}
+#cases .case-tagline {
+    font-family: var(--bs-body-font-family);
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+#cases .case-media video,
+#cases .case-media iframe {
+    border-radius: 0.5rem;
+    background: #000;
+}
+#cases .case-media-placeholder {
+    padding: 2rem;
+    background: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 0.5rem;
+    text-align: center;
+    color: #6c757d;
+}
+#cases .accordion-item {
+    scroll-margin-top: 80px;
+}
