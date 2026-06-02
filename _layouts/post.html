@@ -13,6 +13,18 @@ layout: default
                 {% if page.categories.size > 0 %}
                 &middot;
                 {% for cat in page.categories %}
-                  {% assign badge = site.data.badge_colors[cat] %}
-                  {% if badge %}
-                    <span class="badge" style="background:{{ badge.bg }};color:{{ badge.color }};border-radius:20px;padding:2px 10px;fo
+                {% assign badge = site.data.badge_colors[cat] %}
+                {% if badge %}
+                <span class="badge" style="background:{{ badge.bg }};color:{{ badge.color }};border-radius:20px;padding:2px 10px;font-weight:500;">{{ cat }}</span>
+                {% else %}
+                <span class="badge" style="background:#F1EFE8;color:#444441;border-radius:20px;padding:2px 10px;font-weight:500;">{{ cat }}</span>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="blog-body">
+                {{ content }}
+            </div>
+        </div>
+    </section>
+</div>
