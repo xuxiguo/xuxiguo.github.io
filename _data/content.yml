@@ -42,6 +42,8 @@ navigation:
     label: "About"
   - id: "research"
     label: "Research"
+  - id: "factory"
+    label: "AI Research Factory"
   - id: "teaching"
     label: "Teaching"
   - id: "cases"

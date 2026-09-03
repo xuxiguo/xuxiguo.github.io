@@ -1,0 +1,1023 @@
+---
+layout: default
+title: "Agents in Research | Norman (Xuxi) Guo"
+description: "How to run empirical research with AI agents — and build your own research factory. A tour and manual of the open-source Research Factory plugin for Claude Code."
+---
+<div class="container-fluid p-0">
+<style>
+  /* ===== Agents in Research — page styles (rf- prefix; site theme supplies fonts/nav) ===== */
+  .rf-page { color: #495057; }
+  .rf-page h1 { font-size: 2.6rem; text-transform: none; margin-bottom: .35rem; }
+  .rf-page h2 { font-size: 2rem; text-transform: none; color: #343a40; margin: 0 0 1rem; }
+  .rf-page h3 { text-transform: none; color: #343a40; }
+  .rf-meta { color: #6c757d; margin-bottom: 1.4rem; font-size: .95rem; }
+  .rf-lead { font-size: 1.12rem; line-height: 1.8; max-width: 62rem; }
+  .rf-lead + .rf-lead { margin-top: .8rem; }
+  .rf-accent { color: #bd5d38; }
+  .rf-rule { border: 0; border-top: 1px solid #dee2e6; margin: 0; }
+
+  .rf-statrow { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.4rem 0; }
+  .rf-stat { border: 1px solid #dee2e6; background: #f8f9fa; border-radius: 8px; padding: 8px 16px; font-size: .92rem; color: #495057; }
+  .rf-stat b { font-family: "Saira Extra Condensed", sans-serif; font-size: 1.35rem; color: #bd5d38; margin-right: 6px; font-weight: 700; }
+
+  .rf-code { background: #212529; color: #e9ecef; border-radius: 8px; padding: 16px 20px; font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace; font-size: .88rem; line-height: 1.8; overflow-x: auto; margin: 1.2rem 0; }
+  .rf-code .p { color: #e8a33d; }
+  .rf-code .c { color: #8b94a7; }
+  .rf-code .ok { color: #86b878; }
+  .rf-code .bad { color: #e0846d; }
+
+  .rf-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1.4rem 0; }
+  @media (max-width: 820px) { .rf-grid2 { grid-template-columns: 1fr; } }
+  .rf-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 16px 18px; background: #fff; }
+  .rf-card h3 { font-size: 1.25rem; margin-bottom: .3rem; }
+  .rf-card p { font-size: .95rem; color: #6c757d; margin: 0; line-height: 1.7; }
+
+  .rf-callout { border-left: 3px solid #bd5d38; background: #faf6f3; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 1.6rem 0 0; font-size: 1.02rem; max-width: 62rem; line-height: 1.75; }
+
+  .rf-fig { margin: 2rem 0 0; }
+  .rf-fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; color: #6c757d; }
+  .rf-fig figcaption { font-size: .87rem; color: #6c757d; text-align: center; margin-top: .6rem; max-width: 48rem; margin-left: auto; margin-right: auto; }
+
+  /* ===== Atlas ===== */
+  .rf-atlas { display: grid; grid-template-columns: 322px minmax(0, 1fr); gap: 26px; margin-top: 2rem; align-items: start; }
+  .rf-hint { font-size: .88rem; color: #6c757d; margin-bottom: 1rem; }
+  .rf-filter { width: 100%; padding: 8px 12px; border: 1px solid #ced4da; border-radius: 6px; font-size: .92rem; margin-bottom: 12px; font-family: inherit; color: #495057; }
+  .rf-filter:focus { outline: none; border-color: #bd5d38; box-shadow: 0 0 0 3px rgba(189,93,56,.15); }
+  .rf-group-btn { display: block; width: 100%; text-align: left; background: none; border: none; cursor: pointer; font-family: "Saira Extra Condensed", sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: .04em; text-transform: uppercase; color: #343a40; margin: 18px 0 0; padding: 4px 6px 2px; border-bottom: 2px solid #eadfd8; border-radius: 4px 4px 0 0; }
+  .rf-group-btn:first-of-type { margin-top: 0; }
+  .rf-group-btn:hover, .rf-group-btn.active { color: #bd5d38; background: #faf6f3; }
+  .rf-group-tag { font-size: .78rem; color: #8a8f94; line-height: 1.45; padding: 4px 6px 8px; }
+  .rf-chainwrap { border-left: 2px dotted #dfcfc5; margin-left: 9px; }
+  .rf-item { display: block; width: 100%; text-align: left; background: none; border: none; border-left: 3px solid transparent; margin-left: -2px; padding: 5px 10px; font-size: .92rem; color: #495057; cursor: pointer; border-radius: 0 6px 6px 0; font-family: inherit; line-height: 1.35; }
+  .rf-item:hover { background: #faf6f3; color: #bd5d38; }
+  .rf-item.active { border-left-color: #bd5d38; background: #faf6f3; color: #bd5d38; font-weight: 600; }
+  .rf-item.pinned::after { content: " ⚲"; font-size: .8em; }
+  .rf-num { font-family: "Saira Extra Condensed", sans-serif; font-weight: 700; color: #c9a08c; margin-right: 7px; font-size: .95em; }
+  .rf-item.active .rf-num, .rf-item:hover .rf-num { color: #bd5d38; }
+  .rf-detail { position: sticky; top: 24px; border: 1px solid #dee2e6; border-radius: 10px; background: #fff; padding: 24px 28px; min-height: 440px; box-shadow: 0 2px 10px rgba(52,58,64,.05); }
+  .rf-detail .rf-d-group { font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: #bd5d38; font-weight: 700; margin-bottom: 4px; }
+  .rf-detail h3 { font-size: 1.7rem; margin-bottom: .4rem; font-family: "Saira Extra Condensed", sans-serif; font-weight: 700; }
+  .rf-role { font-size: .92rem; color: #8a4527; background: #faf6f3; border-radius: 6px; padding: 6px 12px; display: inline-block; margin-bottom: 1rem; }
+  .rf-role b { font-weight: 700; }
+  .rf-block { margin-bottom: 1rem; }
+  .rf-block b.rf-lab { display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: #8a8f94; margin-bottom: 3px; }
+  .rf-block p { margin: 0; font-size: .98rem; line-height: 1.75; color: #495057; }
+  .rf-block.rf-ex { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 12px 16px; }
+  .rf-block.rf-ex b.rf-lab { color: #bd5d38; }
+  .rf-src { font-size: .82rem; color: #8a8f94; font-family: SFMono-Regular, Consolas, Menlo, monospace; border-top: 1px dashed #dee2e6; padding-top: 10px; margin-top: 4px; word-break: break-all; }
+  .rf-src a { color: #8a8f94; text-decoration: underline; }
+  .rf-src a:hover { color: #bd5d38; }
+  .rf-next { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .rf-next button { border: 1px solid #dee2e6; background: #fff; border-radius: 8px; padding: 7px 14px; font-size: .88rem; color: #495057; cursor: pointer; font-family: inherit; text-align: left; }
+  .rf-next button:hover { border-color: #bd5d38; color: #bd5d38; }
+  .rf-next button.rf-next-main { border-color: #eadfd8; background: #faf6f3; font-weight: 600; }
+  .rf-chain { list-style: none; margin: 1rem 0 0; padding: 0; }
+  .rf-chain li { padding: 0; margin: 0; }
+  .rf-chain button { display: block; width: 100%; text-align: left; background: none; border: none; border-left: 2px solid #eadfd8; cursor: pointer; font-family: inherit; padding: 7px 12px; font-size: .93rem; color: #495057; line-height: 1.5; }
+  .rf-chain button:hover { background: #faf6f3; border-left-color: #bd5d38; }
+  .rf-chain .cn { font-family: "Saira Extra Condensed", sans-serif; font-weight: 700; color: #bd5d38; margin-right: 8px; }
+  .rf-chain .cr { color: #8a8f94; }
+  .rf-story { font-size: .98rem; line-height: 1.8; color: #495057; }
+  .rf-chain-h { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: #8a8f94; margin: 1.2rem 0 0; font-weight: 700; }
+  .rf-acc-detail { display: none; }
+
+  @media (max-width: 900px) {
+    .rf-atlas { grid-template-columns: 1fr; }
+    .rf-detail { display: none; }
+    .rf-chainwrap { border-left: none; margin-left: 0; }
+    .rf-item, .rf-group-btn { border: 1px solid #dee2e6; border-radius: 8px; margin: 0 0 6px; padding: 10px 14px; }
+    .rf-group-btn { border-color: #eadfd8; background: #faf6f3; margin-top: 14px; }
+    .rf-item.active { border-color: #bd5d38; }
+    .rf-group-tag { padding: 0 4px 8px; }
+    .rf-acc-detail { display: none; border: 1px solid #eadfd8; border-top: none; border-radius: 0 0 8px 8px; margin: -7px 0 8px; padding: 14px 16px; background: #fff; }
+    .rf-acc-detail.open { display: block; }
+    .rf-item.active, .rf-group-btn.active { border-radius: 8px 8px 0 0; margin-bottom: 0; }
+  }
+
+  .rf-steps { counter-reset: rfs; margin: 1.6rem 0 0; display: grid; gap: 14px; max-width: 62rem; }
+  .rf-step { display: grid; grid-template-columns: 46px 1fr; gap: 14px; align-items: start; }
+  .rf-step::before { counter-increment: rfs; content: counter(rfs); font-family: "Saira Extra Condensed", sans-serif; font-weight: 700; font-size: 1.5rem; color: #bd5d38; border: 2px solid #eadfd8; border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: #fff; }
+  .rf-step h3 { font-size: 1.15rem; margin-bottom: .2rem; font-family: inherit; font-weight: 700; }
+  .rf-step p { margin: 0; font-size: .96rem; color: #6c757d; line-height: 1.7; }
+
+  .rf-table { width: 100%; border-collapse: collapse; font-size: .92rem; margin: 1.4rem 0 0; }
+  .rf-table th, .rf-table td { padding: .55rem .75rem; border: 1px solid #dee2e6; vertical-align: top; line-height: 1.6; }
+  .rf-table th { background: #f8f9fa; font-weight: 700; color: #343a40; }
+  .rf-table td:first-child { font-weight: 600; color: #343a40; white-space: nowrap; }
+  .rf-tablewrap { overflow-x: auto; }
+
+  .rf-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.4rem; }
+  .rf-links a { border: 1px solid #dee2e6; border-radius: 8px; padding: 9px 16px; font-size: .92rem; color: #495057; text-decoration: none; background: #fff; }
+  .rf-links a:hover { border-color: #bd5d38; color: #bd5d38; text-decoration: none; }
+</style>
+
+<div class="rf-page">
+
+<!-- ================= HERO ================= -->
+<section class="resume-section" id="top">
+  <div class="resume-section-content">
+    <h1>Agents in Research</h1>
+    <div class="rf-meta">Norman (Xuxi) Guo &middot; Saint Louis University &middot; September 2026 &middot;
+      <a href="https://github.com/xuxiguo/research-factory-claude" target="_blank" rel="noopener">github.com/xuxiguo/research-factory-claude</a></div>
+    <p class="rf-lead">Over the past year I rebuilt my empirical research pipeline around AI agents — not a chatbot
+      that answers questions, but an organized system that pulls data, runs regressions, drafts sections, answers
+      referees, and remembers everything between sessions. I packaged its core as the
+      <b>Research Factory</b>, an open-source plugin for Claude Code: an entire research department in your terminal,
+      from rough idea to journal submission.</p>
+    <p class="rf-lead">The premise behind every design choice is simple. <b>At the start of a big project, you are
+      clearest about the goal.</b> Over the months that follow, an unharnessed AI drifts — it redefines variables,
+      forgets decisions, agrees too readily, and wanders off the question. So read everything on this page as a
+      <b>harness</b>: structure that holds many fast agents to the goal you set on day one, while leaving every
+      judgment call with you. The <a href="#atlas">feature atlas</a> explains each mechanism — the pain it corrects,
+      how it works, what it looks like in use — and the <a href="#build">build-your-own section</a> shows how to grow
+      the same harness around your field, your data, and your standards.</p>
+    <div class="rf-statrow">
+      <span class="rf-stat"><b>28</b> specialist agents</span>
+      <span class="rf-stat"><b>37</b> playbooks (skills)</span>
+      <span class="rf-stat"><b>9</b> conductor commands</span>
+      <span class="rf-stat"><b>9</b> always-on guard hooks</span>
+      <span class="rf-stat"><b>1</b> principal investigator: you</span>
+    </div>
+    <div class="rf-code">
+      <div><span class="p">&gt;</span> /plugin marketplace add xuxiguo/research-factory-claude</div>
+      <div><span class="p">&gt;</span> /plugin install research-factory</div>
+      <div><span class="p">&gt;</span> /research-factory:init-project My-Paper <span class="c"># folders, memory files, project contract</span></div>
+    </div>
+    <p class="rf-meta" style="margin-bottom:0">Requires Claude Code v2+ and Python on PATH. Works in the terminal and
+      the VS Code extension. Every agent, skill, and template is plain Markdown — edit the prose and you have changed
+      the system's behavior.</p>
+  </div>
+</section>
+<hr class="rf-rule"/>
+
+<!-- ================= WHY ================= -->
+<section class="resume-section" id="why">
+  <div class="resume-section-content">
+    <h2>Why a harness, not a chat window</h2>
+    <p class="rf-lead">A chat window is spectacular in the moment and structureless over the months a paper actually
+      takes. Used naively for empirical research, it drifts off your goal in four specific, repeated ways — and each
+      one shaped a part of the factory:</p>
+    <div class="rf-grid2">
+      <div class="rf-card"><h3>It forgets between sessions</h3>
+        <p>Tuesday's sample filters are gone by Thursday. Every new conversation re-explains the project from scratch
+        — or worse, doesn't. <i>Corrected by: shared memory files and session checkpointing.</i></p></div>
+      <div class="rf-card"><h3>It drifts silently</h3>
+        <p>Across a long thread, variable definitions and hypotheses quietly mutate as new plans build on
+        half-remembered old ones. In empirical work this is the fatal failure. <i>Corrected by: a locked design,
+        frozen formulas, and a change log.</i></p></div>
+      <div class="rf-card"><h3>It agrees too easily</h3>
+        <p>It praises the research design it should be attacking, and Referee 2 will not be so kind.
+        <i>Corrected by: a built-in hostile referee and reviewers who cannot be talked out of a finding.</i></p></div>
+      <div class="rf-card"><h3>One fragile thread</h3>
+        <p>A single context window carries data, results, and prose until it overflows — and what mattered most is
+        exactly what gets summarized away. <i>Corrected by: a department of specialists in fresh sessions, connected
+        by handoff notes.</i></p></div>
+    </div>
+    <figure class="rf-fig">
+      <svg viewBox="0 0 980 252" role="img" aria-label="Pipeline diagram: Idea Lab, Strategist, Data Extraction, Data Analysis, Paper Writing, and Revision flow left to right into the journal, with an approval gate between every pair of stations. Below the line, the co-author channel, the presenter, and the sentinel watchdog attach to the whole pipeline.">
+        <defs>
+          <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g font-family="Consolas, Menlo, monospace" font-size="12" fill="currentColor">
+          <g>
+            <rect x="10"  y="40" width="118" height="46" rx="8" fill="none" stroke="currentColor"/>
+            <text x="69"  y="59" text-anchor="middle">Idea-Lab</text>
+            <text x="69"  y="75" text-anchor="middle" font-size="9.5" opacity=".65">brainstorm &amp; rank</text>
+            <rect x="166" y="40" width="118" height="46" rx="8" fill="none" stroke="currentColor"/>
+            <text x="225" y="59" text-anchor="middle">Strategist</text>
+            <text x="225" y="75" text-anchor="middle" font-size="9.5" opacity=".65">design → charter</text>
+            <rect x="322" y="40" width="118" height="46" rx="8" fill="none" stroke="currentColor"/>
+            <text x="381" y="59" text-anchor="middle">Extraction</text>
+            <text x="381" y="75" text-anchor="middle" font-size="9.5" opacity=".65">pull &amp; validate</text>
+            <rect x="478" y="40" width="118" height="46" rx="8" fill="none" stroke="currentColor"/>
+            <text x="537" y="59" text-anchor="middle">Analysis</text>
+            <text x="537" y="75" text-anchor="middle" font-size="9.5" opacity=".65">samples → tables</text>
+            <rect x="634" y="40" width="118" height="46" rx="8" fill="none" stroke="currentColor"/>
+            <text x="693" y="59" text-anchor="middle">Writing</text>
+            <text x="693" y="75" text-anchor="middle" font-size="9.5" opacity=".65">draft → submit</text>
+            <rect x="790" y="40" width="118" height="46" rx="8" fill="none" stroke="currentColor"/>
+            <text x="849" y="59" text-anchor="middle">Revision</text>
+            <text x="849" y="75" text-anchor="middle" font-size="9.5" opacity=".65">answer referees</text>
+          </g>
+          <g stroke="#bd5d38" fill="#bd5d38">
+            <path d="M147,55 l8,8 l-8,8 l-8,-8 z" fill-opacity=".18"/>
+            <path d="M303,55 l8,8 l-8,8 l-8,-8 z" fill-opacity=".18"/>
+            <path d="M459,55 l8,8 l-8,8 l-8,-8 z" fill-opacity=".18"/>
+            <path d="M615,55 l8,8 l-8,8 l-8,-8 z" fill-opacity=".18"/>
+            <path d="M771,55 l8,8 l-8,8 l-8,-8 z" fill-opacity=".18"/>
+          </g>
+          <g stroke="currentColor" fill="none">
+            <line x1="128" y1="63" x2="136" y2="63"/><line x1="158" y1="63" x2="164" y2="63" marker-end="url(#arr)"/>
+            <line x1="284" y1="63" x2="292" y2="63"/><line x1="314" y1="63" x2="320" y2="63" marker-end="url(#arr)"/>
+            <line x1="440" y1="63" x2="448" y2="63"/><line x1="470" y1="63" x2="476" y2="63" marker-end="url(#arr)"/>
+            <line x1="596" y1="63" x2="604" y2="63"/><line x1="626" y1="63" x2="632" y2="63" marker-end="url(#arr)"/>
+            <line x1="752" y1="63" x2="760" y2="63"/><line x1="782" y1="63" x2="788" y2="63" marker-end="url(#arr)"/>
+            <line x1="908" y1="63" x2="944" y2="63" marker-end="url(#arr)"/>
+          </g>
+          <text x="957" y="67" font-size="16" text-anchor="start" fill="#bd5d38">◎</text>
+          <text x="948" y="96" font-size="9.5" text-anchor="middle" opacity=".7">journal</text>
+          <text x="147" y="30" text-anchor="middle" font-size="9.5" fill="#bd5d38">you approve</text>
+          <text x="147" y="112" text-anchor="middle" font-size="9.5" opacity=".65">handoff note →</text>
+          <g stroke="currentColor" stroke-dasharray="4 4" fill="none" opacity=".6">
+            <line x1="230" y1="176" x2="230" y2="90"/>
+            <line x1="490" y1="176" x2="490" y2="90"/>
+            <line x1="750" y1="176" x2="750" y2="90"/>
+          </g>
+          <g>
+            <rect x="130" y="176" width="200" height="46" rx="8" fill="none" stroke="currentColor" opacity=".75"/>
+            <text x="230" y="195" text-anchor="middle">CC-Conductor</text>
+            <text x="230" y="211" text-anchor="middle" font-size="9.5" opacity=".65">co-author sync via Notion</text>
+            <rect x="390" y="176" width="200" height="46" rx="8" fill="none" stroke="currentColor" opacity=".75"/>
+            <text x="490" y="195" text-anchor="middle">Presenter</text>
+            <text x="490" y="211" text-anchor="middle" font-size="9.5" opacity=".65">slide decks from project docs</text>
+            <rect x="650" y="176" width="200" height="46" rx="8" fill="none" stroke="currentColor" opacity=".75"/>
+            <text x="750" y="195" text-anchor="middle">Sentinel</text>
+            <text x="750" y="211" text-anchor="middle" font-size="9.5" opacity=".65">scooping &amp; staleness watch</text>
+          </g>
+          <text x="490" y="245" text-anchor="middle" font-size="9.5" opacity=".55">side channels — attach to the whole line, on demand or on a schedule</text>
+        </g>
+      </svg>
+      <figcaption>The assembly line. Each station is a conductor command; every diamond is a mandatory stop where you
+        approve before the next phase starts in a fresh session. Paper-Lab (close-reading published papers) feeds the
+        front of the line.</figcaption>
+    </figure>
+  </div>
+</section>
+<hr class="rf-rule"/>
+
+<!-- ================= ATLAS ================= -->
+<section class="resume-section" id="atlas">
+  <div class="resume-section-content">
+    <h2>The feature atlas</h2>
+    <p class="rf-lead">The headline feature comes first: <b>the factory is an organization, not an assistant.</b> You
+      direct nine conductors; the conductors direct twenty-eight specialists; a separate audit bench reviews everything
+      with read-only power. That department is what makes months of AI work fast — and fast is exactly why it needs a
+      harness:</p>
+    <figure class="rf-fig" style="margin-top:1.6rem">
+      <svg viewBox="0 0 960 322" role="img" aria-label="Organization chart. You, the principal investigator, sit on top. One command goes down to a row of nine conductors, one per phase; reports and questions come back up. The conductors send briefs with tool budgets down to seven departments totaling twenty-eight specialist agents, and each specialist returns one report. The eleven shared services include a read-only audit bench.">
+        <defs>
+          <marker id="arrO" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g font-family="Consolas, Menlo, monospace" font-size="12" fill="currentColor">
+          <rect x="330" y="14" width="300" height="50" rx="8" fill="#bd5d38" fill-opacity=".08" stroke="#bd5d38"/>
+          <text x="480" y="35" text-anchor="middle" fill="#bd5d38">YOU — the principal investigator</text>
+          <text x="480" y="52" text-anchor="middle" font-size="9.5" opacity=".75">every gate ends here</text>
+          <g stroke="currentColor" fill="none">
+            <line x1="440" y1="64" x2="440" y2="106" marker-end="url(#arrO)"/>
+            <line x1="520" y1="106" x2="520" y2="70" marker-end="url(#arrO)"/>
+          </g>
+          <text x="430" y="90" text-anchor="end" font-size="9.5" opacity=".7">one command per phase</text>
+          <text x="530" y="90" text-anchor="start" font-size="9.5" opacity=".7">reports &amp; one question at a time</text>
+          <rect x="120" y="110" width="720" height="60" rx="8" fill="none" stroke="currentColor"/>
+          <text x="480" y="133" text-anchor="middle">9 conductors — one per phase of a paper's life</text>
+          <text x="480" y="152" text-anchor="middle" font-size="9.5" opacity=".65">ideas · design · deep reading · data · analysis · writing · referees · co-author · slides</text>
+          <g stroke="currentColor" fill="none">
+            <line x1="440" y1="170" x2="440" y2="212" marker-end="url(#arrO)"/>
+            <line x1="520" y1="212" x2="520" y2="176" marker-end="url(#arrO)"/>
+          </g>
+          <text x="430" y="196" text-anchor="end" font-size="9.5" opacity=".7">briefs with tool budgets</text>
+          <text x="530" y="196" text-anchor="start" font-size="9.5" opacity=".7">one report, then gone</text>
+          <g>
+            <rect x="22"  y="216" width="122" height="56" rx="8" fill="none" stroke="currentColor" opacity=".85"/>
+            <text x="83"  y="239" text-anchor="middle">Literature</text>
+            <text x="83"  y="256" text-anchor="middle" font-size="9.5" opacity=".65">2 agents</text>
+            <rect x="154" y="216" width="122" height="56" rx="8" fill="none" stroke="currentColor" opacity=".85"/>
+            <text x="215" y="239" text-anchor="middle">Extraction</text>
+            <text x="215" y="256" text-anchor="middle" font-size="9.5" opacity=".65">2 agents</text>
+            <rect x="286" y="216" width="122" height="56" rx="8" fill="none" stroke="currentColor" opacity=".85"/>
+            <text x="347" y="239" text-anchor="middle">Analysis</text>
+            <text x="347" y="256" text-anchor="middle" font-size="9.5" opacity=".65">2 agents</text>
+            <rect x="418" y="216" width="122" height="56" rx="8" fill="none" stroke="currentColor" opacity=".85"/>
+            <text x="479" y="239" text-anchor="middle">Writing</text>
+            <text x="479" y="256" text-anchor="middle" font-size="9.5" opacity=".65">5 agents</text>
+            <rect x="550" y="216" width="122" height="56" rx="8" fill="none" stroke="currentColor" opacity=".85"/>
+            <text x="611" y="239" text-anchor="middle">Revision</text>
+            <text x="611" y="256" text-anchor="middle" font-size="9.5" opacity=".65">3 agents</text>
+            <rect x="682" y="216" width="122" height="56" rx="8" fill="none" stroke="currentColor" opacity=".85"/>
+            <text x="743" y="239" text-anchor="middle">Co-author</text>
+            <text x="743" y="256" text-anchor="middle" font-size="9.5" opacity=".65">3 agents</text>
+            <rect x="814" y="216" width="122" height="56" rx="8" fill="#bd5d38" fill-opacity=".05" stroke="#bd5d38" opacity=".9"/>
+            <text x="875" y="239" text-anchor="middle">Shared</text>
+            <text x="875" y="256" text-anchor="middle" font-size="9.5" opacity=".65">11 agents</text>
+          </g>
+          <text x="480" y="304" text-anchor="middle" font-size="10" opacity=".7">the 11 shared services include the audit bench — critics and validators with read-only power, who can flag but never touch</text>
+        </g>
+      </svg>
+      <figcaption>The department. Work flows down as briefs; results flow up as single reports; nothing important
+        happens without passing you. System 1 below explains each piece of this chart.</figcaption>
+    </figure>
+    <p class="rf-lead" style="margin-top:2rem">The six systems below are that department plus its harness, in the
+      order a paper meets them: <b>who does the work</b>, <b>is the goal right</b>, <b>can the goal drift</b>,
+      <b>is every step checked</b>, <b>does it learn your field</b>, and <b>who commands</b>. Within each system the
+      features are a chain, not a list — every pain point hands off to the next fix. <b>Click a system's name</b> for
+      the story of its chain; <b>hover any feature</b> for the pain it corrects, the harness that corrects it, and
+      what that looks like in practice; use <b>next</b> on each card to read the whole atlas as one connected walk.</p>
+    <div class="rf-atlas">
+      <div class="rf-list" id="rf-list">
+        <p class="rf-hint" id="rf-hint">6 systems &middot; 48 features &middot; hover to preview &middot; click to pin</p>
+        <input type="text" class="rf-filter" id="rf-filter" placeholder="Filter features…" aria-label="Filter features">
+        <div id="rf-items"></div>
+      </div>
+      <div class="rf-detail" id="rf-detail" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+<hr class="rf-rule"/>
+
+<!-- ================= BUILD YOUR OWN ================= -->
+<section class="resume-section" id="build">
+  <div class="resume-section-content">
+    <h2>Build your own factory</h2>
+    <p class="rf-lead">The plugin you install is a <b>skeleton</b>: the organization chart, the memory schema, the
+      review loops, the guard hooks. The <b>muscle</b> is your field knowledge — and the factory's real trick is that
+      it grows that muscle on its own. My copy has taught itself twenty-two guard skills from its own mistakes
+      (sixteen ship in the public plugin); yours will learn different ones, because your data and your methods fail
+      differently. Six months in, your factory and mine will share a skeleton and disagree about everything else.
+      That is the design working.</p>
+    <div class="rf-steps">
+      <div class="rf-step"><div><h3>Install the skeleton, initialize one paper</h3>
+        <p>Three plugin commands, then <span class="rf-accent">init-project</span> — it creates the folder structure,
+        the memory files, and a project contract. Don't study it first; the conductors explain themselves as you go.</p></div></div>
+      <div class="rf-step"><div><h3>Swap my field profile for yours</h3>
+        <p>Idea-Lab carries my research interests (fintech, banking, microstructure); the house-style skill carries my
+        writing voice and table standards; the regression playbooks assume finance conventions like clustered standard
+        errors and fixed-effects grids. All of it is plain Markdown. Rewrite those files in your field's terms — a
+        health economist's data playbooks and a macroeconomist's are supposed to diverge here.</p></div></div>
+      <div class="rf-step"><div><h3>Work normally, with the gates on</h3>
+        <p>Run a real paper through the line. Lock a charter, let plans pass review, let the critic loop catch what it
+        catches. The point of the early weeks is not speed — it is teaching the system what "done correctly" means in
+        your area, one approved gate at a time.</p></div></div>
+      <div class="rf-step"><div><h3>Let it distill what you both learn</h3>
+        <p>Every phase ends with a distillation sweep: anything that took real trial-and-error and then verified gets
+        written down as a skill that auto-triggers next time. When your database's merge quirk or your method's
+        numerical trap bites once, it becomes a guard — and it never bites again. This is where your factory stops
+        being mine.</p></div></div>
+      <div class="rf-step"><div><h3>Audit the memory, not the transcripts</h3>
+        <p>Once a month, read three files: the charter (is the locked design still what you believe?), the belief
+        ledger (which results are robust, fragile, dead?), and the lessons file (what has it learned?). Those three
+        pages are the project — the ten thousand lines of chat that produced them are disposable.</p></div></div>
+    </div>
+
+    <h3 style="margin-top:3rem; font-size:1.5rem;">Why this is more than a CLAUDE.md</h3>
+    <p class="rf-lead">Most people's first move is to write one big instruction file and hope the model reads it. That
+      works for preferences; it cannot carry a discipline. The factory splits "teaching the machine" into four
+      mechanisms, each doing the one job it is good at:</p>
+    <div class="rf-tablewrap">
+    <table class="rf-table">
+      <tr><th style="width:12rem">Mechanism</th><th>What it carries</th><th>Why a CLAUDE.md can't do it</th></tr>
+      <tr><td>CLAUDE.md contract</td>
+        <td>A one-page constitution per project: folder conventions, the mandatory-stop rule, where memory lives.</td>
+        <td>This one it can — kept short. It is the only always-loaded piece, so every line must earn its place.</td></tr>
+      <tr><td>Skills</td>
+        <td>Procedures with trigger conditions: "when a CCM merge inflates row counts, do this." Load only when their
+        symptoms match the task at hand.</td>
+        <td>A flat file grows until nothing in it is read. Skills are retrieval-keyed — forty of them cost nothing
+        until exactly one is needed, and each can hold a full page of hard-won detail.</td></tr>
+      <tr><td>Hooks</td>
+        <td>Rules enforced by code on every tool call: raw data is unwritable, state checkpoints at every stop,
+        a snapshot fires before context compaction.</td>
+        <td>An instruction is a suggestion the model may forget under pressure. A hook runs whether or not anyone
+        remembers — protection that does not depend on attention.</td></tr>
+      <tr><td>Memory files</td>
+        <td>The project's evolving state: locked design, decision history, beliefs about results, current phase.</td>
+        <td>Instructions are static; a project is not. State needs files that agents read and write under rules —
+        append-only here, amend-with-approval there.</td></tr>
+    </table>
+    </div>
+
+    <figure class="rf-fig">
+      <svg viewBox="0 0 960 218" role="img" aria-label="Three ephemeral sessions sit above one persistent memory bar. At each session end a checkpoint hook writes state down; at each session start a restore hook reads it back; before context compaction a snapshot hook saves first. The sessions die; the memory survives.">
+        <defs>
+          <marker id="arr2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g font-family="Consolas, Menlo, monospace" font-size="12" fill="currentColor">
+          <rect x="40"  y="26" width="230" height="52" rx="8" fill="none" stroke="currentColor" stroke-dasharray="5 4"/>
+          <text x="155" y="48" text-anchor="middle">session 1</text>
+          <text x="155" y="66" text-anchor="middle" font-size="9.5" opacity=".65">dies at the window's edge</text>
+          <rect x="365" y="26" width="230" height="52" rx="8" fill="none" stroke="currentColor" stroke-dasharray="5 4"/>
+          <text x="480" y="48" text-anchor="middle">session 2</text>
+          <text x="480" y="66" text-anchor="middle" font-size="9.5" opacity=".65">⚡ compaction mid-run</text>
+          <rect x="690" y="26" width="230" height="52" rx="8" fill="none" stroke="currentColor" stroke-dasharray="5 4"/>
+          <text x="805" y="48" text-anchor="middle">session 3</text>
+          <text x="805" y="66" text-anchor="middle" font-size="9.5" opacity=".65">resumes in one read</text>
+          <g stroke="currentColor" fill="none">
+            <line x1="120" y1="78" x2="120" y2="140" marker-end="url(#arr2)"/>
+            <line x1="330" y1="140" x2="330" y2="84" marker-end="url(#arr2)"/>
+            <line x1="445" y1="78" x2="445" y2="140" marker-end="url(#arr2)"/>
+            <line x1="655" y1="140" x2="655" y2="84" marker-end="url(#arr2)"/>
+            <line x1="870" y1="78" x2="870" y2="140" marker-end="url(#arr2)"/>
+          </g>
+          <text x="112" y="115" text-anchor="end" font-size="9.5" opacity=".7">checkpoint (Stop hook)</text>
+          <text x="338" y="115" text-anchor="start" font-size="9.5" opacity=".7">restore (SessionStart)</text>
+          <text x="437" y="134" text-anchor="end" font-size="9.5" opacity=".7">snapshot (PreCompact)</text>
+          <rect x="40" y="146" width="880" height="46" rx="8" fill="#bd5d38" fill-opacity=".08" stroke="#bd5d38"/>
+          <text x="480" y="166" text-anchor="middle" fill="#bd5d38">docs/_backbone/ — charter · decisions · beliefs · state · pipeline</text>
+          <text x="480" y="183" text-anchor="middle" font-size="9.5" opacity=".75">the project's memory — survives every session, every model swap</text>
+        </g>
+      </svg>
+      <figcaption>The mechanism that makes accumulation possible: sessions are disposable, the memory bar is not.
+        Your distilled field knowledge lives below the line — which is why it compounds instead of evaporating.</figcaption>
+    </figure>
+
+    <p class="rf-callout">The model is rented and improves on someone else's schedule. The skeleton is shared and
+      improves when I push a commit. <b>The distilled knowledge is yours alone</b> — it is the part of the system
+      that knows your database's traps, your methods' failure modes, and your field's standards. That layer, not the
+      model, is where a research group's edge will live.</p>
+  </div>
+</section>
+<hr class="rf-rule"/>
+
+<!-- ================= TOUR ================= -->
+<section class="resume-section" id="tour">
+  <div class="resume-section-content">
+    <h2>What a session actually looks like</h2>
+    <p class="rf-lead">Condensed and illustrative, but faithful to the choreography — the interesting decisions come
+      to you; the mechanics don't:</p>
+    <div class="rf-code" role="img" aria-label="An illustrative terminal session: the strategist stages a design debate and locks the charter; the data conductor pulls and validates holdings data; the analysis conductor runs the locked specifications, self-checks hypothesis signs, and updates the belief ledger before stopping for approval.">
+      <div><span class="p">you &gt;</span> /research-factory:strategist — does local institutional ownership speed up price discovery around earnings news?</div>
+      <div style="margin-top:8px"><span class="c">strategist ·</span> drafts H1–H3 with expected signs, then stages the design debate. The defense argues the identification holds; the hostile referee fires back: "institutions may simply select fast-discovery stocks." Ruling, on the record: add matched-sample robustness.</div>
+      <div><span class="c">strategist ·</span> you approve → <span class="ok">charter locked</span> · handoff note written for extraction</div>
+      <div style="margin-top:8px"><span class="p">you &gt;</span> /research-factory:de-conductor — execute</div>
+      <div><span class="c">extraction ·</span> pulls 13F holdings + earnings dates · validates the merge (<span class="ok">98.4% coverage</span>) · writes the data dictionary · checkpoints state</div>
+      <div style="margin-top:8px"><span class="p">you &gt;</span> /research-factory:da-conductor — execute</div>
+      <div><span class="c">analysis ·</span> builds the sample (186K firm-quarters) · runs the locked specs · self-checks every sign:</div>
+      <div>&nbsp;&nbsp;H1 <span class="ok">✓</span>&nbsp;&nbsp;H2 <span class="ok">✓</span>&nbsp;&nbsp;H3 <span class="bad">✗ flips under industry-year FE</span> → belief ledger: H3 → FRAGILE</div>
+      <div><span class="c">analysis ·</span> publication-ready tables presented — nothing ships until you say so ▊</div>
+    </div>
+  </div>
+</section>
+<hr class="rf-rule"/>
+
+<!-- ================= CLOSE ================= -->
+<section class="resume-section" id="close">
+  <div class="resume-section-content">
+    <h2>Install it, break it, tell me what it should do next</h2>
+    <p class="rf-lead">The public plugin is the sanitized core of the factory I run every day, and it is deliberately
+      unfinished — because the finishing is yours to do, in your field. If you build one, I want to hear what it
+      learned.</p>
+    <div class="rf-links">
+      <a href="https://github.com/xuxiguo/research-factory-claude" target="_blank" rel="noopener">⭐ The Research Factory on GitHub</a>
+      <a href="https://xuxiguo.github.io/blog/">The blog series on agents</a>
+      <a href="mailto:norman.guo@slu.edu">norman.guo@slu.edu</a>
+    </div>
+    <p class="rf-meta" style="margin-top:2rem">Norman (Xuxi) Guo &middot; Saint Louis University &middot; built with
+      Claude Code &middot; this page was produced by the factory's own tooling</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function () {
+  var REPO = "https://github.com/xuxiguo/research-factory-claude/tree/main/";
+
+  /* Groups: {g, slug, goal, story}; items: {id, name, role, why, how, ex, src} */
+  var GROUPS = [
+
+  { g: "The organization", slug: "organization",
+    goal: "Who does the work? Not one overloaded chat — a department: nine conductors, twenty-eight specialists, and an audit bench that can't touch the code.",
+    story: "The pain this system corrects is the mega-conversation: one chat asked to design, code, analyze, and write until it overflows and does everything badly. The correction is the department in the chart above, built piece by piece. You talk to one conductor per phase (1.1), and each conductor delegates to narrow specialists instead of doing the work itself (1.2). Checking power is then split off from writing power — the reviewers can flag anything and fix nothing (1.3). To keep all those minds on-task, every delegation is a tight brief with a tool budget (1.4), and when a phase ends, a handoff note carries the approved plan into a fresh session so no thread ever has to survive the whole project (1.5). Intelligence is budgeted the same way the work is — expensive models only where judgment lives (1.6) — and one command stands the entire structure up for each new paper (1.7).",
+    items: [
+    { id: "conductor-doors", name: "One conductor per research phase",
+      role: "you direct phases, not prompts",
+      why: "One mega-conversation doing design, data, analysis, and writing at once is how context overflows and roles blur. Research phases have different jobs, different risks, and different definitions of done.",
+      how: "Nine conductor commands, one per phase of a paper's life: idea-lab, strategist, paper-lab, de-conductor (extraction), da-conductor (analysis), pw-editor (writing), rev-strategist (referee responses), cc-conductor (co-author sync), presenter (slides). Each orchestrates only its phase, reads the shared memory on start, and closes with your approval.",
+      ex: "Referee reports arrive → you type /research-factory:rev-strategist. It categorizes every comment, proposes a concede-vs-push-back strategy, and coordinates the changes — without touching the extraction or analysis machinery at all.",
+      src: "plugin/commands/" },
+    { id: "specialist-workers", name: "28 specialists instead of one generalist",
+      role: "each task lands in the narrowest capable hands",
+      why: "A single generalist agent does everything passably and nothing excellently — and every task it does pollutes the same context window that must later write careful prose.",
+      how: "Conductors delegate to 28 narrow specialists across seven departments: Literature (Scout, Reader), Extraction (Miner, Refiner), Analysis (Builder, Executor), Writing (Drafter, Bibliographer, Typesetter, Compiler, Submission), Revision (Respondent, Auditor, Liaison), Co-author channel (Briefer, Intake, Publisher), and eleven Shared Services. Each returns one report and disappears — its mess never enters the conductor's context.",
+      ex: "The data miner writes extraction code against WRDS; the regression executor runs specs and formats journal tables; the typesetter fixes LaTeX cross-references. None of them ever sees the others' scratch work.",
+      src: "plugin/agents/" },
+    { id: "readonly-critics", name: "Reviewers who can't touch the work",
+      role: "checking power split off from writing power",
+      why: "Self-review is theater: the same hand that wrote the code will 'verify' it generously. And a reviewer who can edit will quietly fix what it finds — destroying the evidence that anything was wrong.",
+      how: "The audit bench — the critic, the code reviewer, the domain reviewer, the data validator, the revision auditor — holds read-only tools. They can flag, score, and demand; they cannot touch. Fixes go back through the agent that owns the artifact, and the critic re-verifies.",
+      ex: "The reviewer finds a sample filter applied after the merge instead of before it. It cannot 'helpfully' reorder the script — it files the finding, the builder fixes it, and the re-review confirms the row count moved as predicted.",
+      src: "plugin/agents/SS-Critic.md" },
+    { id: "task-briefs", name: "Every task delegated with a tight brief",
+      role: "keeps each delegated mind small and on-task",
+      why: "An open-ended 'go figure it out' instruction produces runaway agents: forty tool calls, half of them re-reading files, drifting off the task.",
+      how: "Every delegation uses a fixed brief — TASK, CONTEXT, SCOPE, OUTPUT, BUDGET — with an explicit tool-call budget (typically 10–15). The worker gets everything it needs in one message and knows exactly what a finished report looks like.",
+      ex: "\"TASK: inventory available data files. SCOPE: list types, sizes, key variables. OUTPUT: structured inventory. BUDGET: 10 tool calls.\" The scout returns one tight report instead of a meandering exploration.",
+      src: "plugin/commands/strategist.md" },
+    { id: "handoff-notes", name: "Fresh sessions, linked by handoff notes",
+      role: "phases connect without one endless thread",
+      why: "The alternative to one giant conversation is many small ones — but then each new session starts blind, and cross-phase context dies at the boundary.",
+      how: "When a phase closes, the conductor writes a handoff note: target conductor, the approved plan, key files, active flags. The next conductor detects it on startup, loads exactly that context, and renames the file to mark it consumed — so a stale handoff can never be replayed.",
+      ex: "The strategist locks the design and writes a handoff for the extraction conductor. You open a completely fresh chat tomorrow, type the command, and it says: \"Handoff received from Strategist. Ready to execute?\"",
+      src: "plugin/skills/context-recovery/" },
+    { id: "model-routing", name: "Expensive models only where judgment lives",
+      role: "intelligence budgeted like the work is",
+      why: "Running a frontier model on file inventory burns money; running a small model on research design burns papers. Uniform model choice is wrong in both directions.",
+      how: "Each agent declares its model tier in frontmatter: conductors and the plan reviewer run on the strongest model; execution workers on mid-tier; scouts and lookups on the fastest. The expensive judgment is spent exactly where judgment lives.",
+      ex: "The plan is written and reviewed at the top tier, then executed by cheaper workers — because a plan written as a contract (system 4) no longer needs interpretation to run.",
+      src: "plugin/agents/" },
+    { id: "init-project", name: "A new paper set up in one command",
+      role: "the whole structure, standing in thirty seconds",
+      why: "A system this structured would be unusable if every paper began with an hour of folder ceremony.",
+      how: "init-project creates the folder tree, seeds the memory files, and writes a one-page project contract. Memory grows in stages by design: basics at initialization, the locked charter and specs at design approval, the experiment and belief ledgers once results exist.",
+      ex: "/research-factory:init-project Earnings-Discovery — thirty seconds later the project has its backbone, and the strategist can start planning against it.",
+      src: "plugin/commands/init-project.md" }
+  ]},
+
+  { g: "Set the goal right", slug: "goal-right",
+    goal: "Is the goal right? Prove the question is new — and worth months — before anything gets locked.",
+    story: "The pain here is committing months to a question someone has already answered. The harness front-loads the scrutiny, in order. First, candidate ideas are generated where three streams of evidence cross, so you start from real gaps rather than vibes (2.1). Each surviving idea then faces the literature the hard way: the search runs in six passes until it stops yielding anything new (2.2); the nearest rivals are read in full, because the killing detail hides in appendices that abstracts never mention (2.3); and three prosecutors actively hunt for the paper that makes yours redundant (2.4). Only after that gauntlet may a novelty score exist (2.5) — a score you earn, not assert. Two habits then keep the standard alive over time: structured deep-reads keep building the field map these checks depend on (2.6), and a scheduled scooping check keeps re-testing the goal after you commit (2.7).",
+    items: [
+    { id: "three-pillar-ideation", name: "Ideas from literature, industry, and the frontier",
+      role: "candidate goals born at real intersections",
+      why: "Ideas generated from the literature alone are derivative; from news alone, unrigorous; from methods alone, answers looking for questions. The good ones sit at intersections.",
+      how: "Idea-Lab scans three directions before proposing anything: the literature foundation (established findings, active debates, flagged-but-unpursued extensions), the industry pulse (regulator reports, practitioner frictions, policy shifts that create natural experiments), and the research frontier (working papers, conference programs, crowding signals). It then generates 5–10 concrete ideas, each with its question, mechanism, data requirements, and nearest rival — and ranks them on uniqueness, executability, and contribution.",
+      ex: "A BIS report on instant-payment adoption (industry) × an open debate on deposit stickiness (literature) × a new payments dataset (frontier) → a ranked idea with the identification sketch attached.",
+      src: "plugin/commands/idea-lab.md" },
+    { id: "retrieval-ladder", name: "Six search passes, until nothing new appears",
+      role: "makes sure the killer paper was findable at all",
+      why: "The paper that kills your idea often uses a different vocabulary for the same friction — keyword search alone simply cannot find it.",
+      how: "Six retrieval modes, run to saturation: restate the idea in three literatures' vocabularies and search each; walk anchor papers' reference lists backward; walk their citations forward sorted by date, not relevance — the paper that threatens you is the newest, which relevance ranking buries; sweep working papers (SSRN, NBER, arXiv); sweep conference programs and job-market papers; sweep the anchor authors' recent output. Stop only when two consecutive modes add nothing, and log every query so the next session searches the delta.",
+      ex: "Modes 1–4 look clear; mode 5 surfaces a job-market paper on the same design. Painful — and worth an entire year of not competing with a dissertation.",
+      src: "plugin/skills/lit-search/" },
+    { id: "read-depth", name: "No rival judged by its abstract",
+      role: "the close competitors get read, provably, in full",
+      why: "The most common literature failure is judging a paper from its Google Scholar snippet. The extension you're proposing is frequently already in that paper's Appendix Table A7 — and abstracts never mention appendices.",
+      how: "Every paper in the corpus carries a tag for how deeply it was actually read — from title-and-abstract only, up to a full read that returns a structured card: sample, identification, table-by-table findings, the complete appendix inventory, and the conclusion's future-research list verbatim. The anti-fabrication rule: if full text couldn't be fetched, the tag stays at the bottom level — a failed download is reported, never paraphrased into a 'read'.",
+      ex: "\"Nearest rival, read in full: their Appendix B4 already runs the size split — but only for mutual funds; our insurer sample survives.\" That sentence requires a real read, and the tag proves one happened.",
+      src: "plugin/skills/lit-search/" },
+    { id: "novelty-prosecution", name: "A deliberate hunt for the killer paper",
+      role: "the idea attacked before you commit to it",
+      why: "'I couldn't find anything similar' usually means the search was gentle. A novelty claim should survive an active attempt to destroy it.",
+      how: "Three prosecutors attack independently, each with a different lens: the same question in a different setting (asset class, country, era); the same mechanism under different vocabulary; the same design — shock, instrument, dataset — with a different outcome. Verdicts are kills, wounds, or clears, with an asymmetric burden: a kill requires a named paper and a quoted passage; a clear requires at least four distinct queries including a forward-citation chain; uncertainty defaults to wounded, never cleared.",
+      ex: "Prosecutor 3: \"Same staggered shock, deposit-rate outcome instead of yours — Author (2024), Table 6. Wound: your outcome survives, but the intro must position against them.\"",
+      src: "plugin/skills/lit-search/" },
+    { id: "uniqueness-ceiling", name: "Novelty scores you have to earn",
+      role: "enthusiasm can't inflate the ranking",
+      why: "Enthusiasm inflates novelty scores exactly when they matter most — at the moment you decide where the next six months go.",
+      how: "No idea can score above 3-of-5 on uniqueness until the search reached saturation, the three nearest rivals were read in full and adjudicated, the prosecution returned, and the differentiation sentence exists with a real citation in it: \"Unlike Author (Year), who does X, we do Y, which matters because Z.\" Scores assigned early are displayed as provisional — never laundered into clean numbers.",
+      ex: "An exciting idea sits at \"4*/5 (provisional — rivals unread)\" for a week. Two full reads later it's an honest 4, and the intro's positioning paragraph has already written itself.",
+      src: "plugin/skills/lit-search/" },
+    { id: "paper-lab", name: "Structured deep-reads of key papers",
+      role: "keeps building the field map the checks depend on",
+      why: "Skimming twenty abstracts builds vocabulary, not understanding. Deep comprehension of the papers that matter is what design instincts are made of.",
+      how: "A structured 30–40 minute reading session per paper: author background and networks, a full structural breakdown (identification, sample construction, table-by-table results with economic magnitudes, the complete appendix inventory), a Referee-2 critique with severity ratings from minor to fatal, positioning in your literature map, and two or three concrete extension ideas.",
+      ex: "A session on a well-known machine-learning-in-funds paper surfaces that its headline result rests on one winsorization choice — flagged Major — and yields an extension idea that later survives the prosecution.",
+      src: "plugin/commands/paper-lab.md" },
+    { id: "scooping-radar", name: "A standing watch against being scooped",
+      role: "keeps re-testing the goal after you commit",
+      why: "Between your sessions the world keeps publishing. The worst way to learn about a competing paper is from a referee report calling yours 'closely related to'.",
+      how: "An opt-in scheduled sweep: forward-citation checks on your anchor papers filtered to the last six months — anyone running your design has to cite your anchors, which makes this the single highest-yield query — plus a topical search phrased in a rival literature's vocabulary, plus a working-paper pass. Hits are triaged COMPETING, ADJACENT, or IGNORE. It also spot-checks the draft's headline numbers against the current tables and flags stalled stages. Read-only by design: it briefs, it never acts.",
+      ex: "Monday brief: \"1 COMPETING — same shock, bank-level outcome, on SSRN last week. Suggested response: accelerate; your firm-level channel is unclaimed. Also: draft quotes 2.1% where Table 2 now says 1.8%.\"",
+      src: "plugin/skills/project-sentinel/" }
+  ]},
+
+  { g: "Lock the goal in writing", slug: "lock-goal",
+    goal: "Can the goal drift? Not once it lives in files with locks, logs, and version rules.",
+    story: "The pain is silent drift — the deadliest failure in months-long AI work: definitions and hypotheses mutating with nobody deciding anything. The correction is to move the goal out of conversation and into files, in layers. Shared memory gives every agent one place to read and write (3.1). On top of it, the charter locks what the project is (3.2), and the spec lock compiles that into the exact formulas and windows code must obey (3.3) — while every change to either leaves a dated reason in an append-only log (3.4). With the goal pinned, evidence can safely accumulate against it: every regression goes on the record (3.5) and gets graded into a living verdict — solid, shaky, or dead (3.6) — while local data quirks are written down once so they never bite twice (3.7). The outer layer protects the work itself: progress is checkpointed so any crash or fresh session resumes in one read (3.8), a live map shows the whole journey (3.9), and every dataset keeps exactly one owner script so the code base can't fork under the project (3.10).",
+    items: [
+    { id: "three-tier-docs", name: "Shared memory in files, not chat",
+      role: "one place every agent reads and writes",
+      why: "Agents cannot share a chat window, and 'just read everything' collapses once a project has a hundred files. Shared state needs a load order.",
+      how: "The project's docs are tiered: a backbone folder holds compact always-load files (state, index, charter, beliefs); a plans folder holds numbered plans; a details folder holds long reports and logs. Conductors load the index first and follow pointers — a few kilobytes orient any agent in any session.",
+      ex: "A fresh analysis session reads the index, then the state file, then the one active plan — and knows the project's entire standing in three reads instead of a hundred.",
+      src: "plugin/skills/backbone-update/" },
+    { id: "locked-charter", name: "A research design under lock",
+      role: "locks what the project is",
+      why: "The deadliest failure in long AI-assisted research is silent drift: hypotheses, sample filters, and variable definitions mutating across sessions with nobody deciding anything.",
+      how: "The charter file holds the founding design — hypotheses with expected signs, treatment definitions, sample rules — under change control. Every session starts by checking it; every plan must cite which locked items it touches. Changes require an explicit amendment: versioned at the top of the file, approved by you, logged with a reason. A reflection pass at session end catches drift that slipped through.",
+      ex: "A robustness idea implies widening the sample window. The conductor stops: \"This touches locked item #3. Amend the charter, version 2 → 3?\" — and the change either happens on the record or not at all.",
+      src: "plugin/skills/memory-charter/" },
+    { id: "spec-lock", name: "Exact formulas, frozen before coding",
+      role: "compiles the goal into numbers code must obey",
+      why: "A charter states the design in words; code needs numbers. The gap between \"local ownership\" and its exact formula is where a helpful AI quietly 'improves' your measure mid-project.",
+      how: "The conductor drafts the full specification itself — every measure formula, treatment contrast, covariate set, event window, and standard-error method — and you approve it as a one-line table review, never by editing configuration files. Once locked, every later conversation must use those values verbatim; if you casually say something that implies changing one, the conductor refuses to act until you confirm in writing, then bumps the version. A preflight script checks code against the lock before any cluster job is submitted — a failed check means nothing runs.",
+      ex: "\"Use a 90-day window instead?\" → \"That would change a LOCKED value (event window: 60 days, version 3). Confirm in writing and I'll update the lock and re-run the preflight check.\" A casual remark cannot re-specify the paper.",
+      src: "plugin/commands/da-conductor.md" },
+    { id: "decision-log", name: "Every change logged with its reason",
+      role: "the goal's full paper trail",
+      why: "Six months in, nobody remembers why the third outcome variable was dropped — and a referee will ask.",
+      how: "The decision log is append-only: every addition, drop, filter change, or measure swap gets one dated line with its reason. Nothing is ever edited or deleted; the file is the project's paper trail.",
+      ex: "\"D-041: DROP volume-based channel — power too low in the small-cap cell (see experiment E-112).\" When the referee asks, the answer is one lookup away.",
+      src: "plugin/skills/memory-charter/" },
+    { id: "experiment-registry", name: "Every regression on the record",
+      role: "evidence accumulates against the locked goal",
+      why: "\"Which specification produced Table 3?\" is an unanswerable question in most AI-assisted projects — and an unanswerable question at submission time is a crisis.",
+      how: "The experiment registry logs every regression run: date, specification, dependent variable, key coefficient with its standard error, sample size, sign-match verdict, and the output file it fed. The full coefficient detail lives in a lab workbook; the registry is the searchable index into it.",
+      ex: "A coefficient in the draft looks unfamiliar. The registry traces it to run E-097, its exact spec, and the script that produced it — in one lookup instead of an afternoon of archaeology.",
+      src: "plugin/skills/experiment-registry/" },
+    { id: "belief-ledger", name: "Results graded: solid, shaky, or dead",
+      role: "raw evidence turned into living judgment",
+      why: "Results scattered across chat transcripts are not knowledge. What a project actually knows is which findings are solid, which are shaky, and which died — and that judgment usually lives only in the researcher's head.",
+      how: "The belief ledger keeps one entry per hypothesis, graded ROBUST, FRAGILE, or DEAD, with the experiment IDs behind the grade and — for fragile ones — the exact condition that flips them. Every regression batch must update it; planning sessions read it before proposing anything, and no dead specification is re-run without new justification.",
+      ex: "\"H3: FRAGILE — positive and significant in the base spec, flips under industry-year fixed effects (E-118, E-121).\" The next specification is designed knowing that, not rediscovering it.",
+      src: "plugin/skills/experiment-registry/" },
+    { id: "lessons-file", name: "Data quirks written down once",
+      role: "local scars that never bite twice",
+      why: "Some knowledge is real but too local for a reusable skill — this database's date quirk, that variable's coverage cliff. Losing it means paying for it twice.",
+      how: "The lessons file accumulates data quirks, methodological dead ends, and what-worked notes, appended as they happen. Conductors read it at session start, so old scars inform new plans.",
+      ex: "\"13F filing dates lag quarter-end by up to 45 days — align on the report date, not the filing date.\" Written once in March, it silently prevents the same merge bug in September.",
+      src: "plugin/skills/backbone-update/" },
+    { id: "state-recovery", name: "Progress that survives a crash",
+      role: "any fresh session resumes in one read",
+      why: "Sessions end, contexts compact, laptops sleep. If progress lives only in the conversation, every interruption is a partial project reset.",
+      how: "The state file records current phase, completed steps, open questions, and modified files. A hook checkpoints it at every pause; another snapshots before the context window is compressed; a third restores on reentry. The recovery protocol also cross-checks git history, so even an unlogged change is visible.",
+      ex: "Claude Code crashes mid-analysis. You reopen, type the conductor command, and get: \"Resuming: Phase 2 of 4 complete, regression batch 3 pending. Continue?\" Nothing is re-run, nothing is lost.",
+      src: "plugin/skills/context-recovery/" },
+    { id: "pipeline-map", name: "A live map of the whole project",
+      role: "nobody — human or agent — plans blind",
+      why: "Long projects sprawl: parallel tracks, revised plans, stages blocked on other stages. Neither you nor the agents can hold the whole graph in your head.",
+      how: "A pipeline file records every stage as a node with dependencies, revision chains, and status; a script renders it into a flowchart dashboard. Conductors read it on start and append to it on completion — and a bootstrap script can reconstruct the map for a project that predates the factory.",
+      ex: "\"Pipeline shows 12 stages; current: robustness (in progress); next stage blocked, waiting on it.\" One glance replaces a scroll through months of plans.",
+      src: "plugin/scripts/pipeline_dashboard.py" },
+    { id: "build-registry", name: "Exactly one script per dataset",
+      role: "the code base can't fork under the goal",
+      why: "The default failure of agent-written code: five near-duplicate scripts each building a slightly different version of the same dataset, and no one knows which output is current.",
+      how: "The build registry is the project's build graph: every artifact has exactly one owner script, its inputs, and its consumers. Agents must read it before writing code — the rule is edit the owner, never create a parallel copy. Artifacts marked frozen are trusted save-points; when an upstream file is rebuilt, every consumer is flagged stale until re-verified.",
+      ex: "A worker needs the analysis sample with one extra column. The registry points it to the owner script; it edits in place, the sample's hash updates, and the two downstream tables are flagged stale for re-run.",
+      src: "plugin/templates/_REGISTRY.yaml" }
+  ]},
+
+  { g: "Check every step", slug: "check-steps",
+    goal: "Is each step true to the goal? Design, plan, data, numbers, prose, and promises each face their own gate.",
+    story: "The pain is misplaced trust: between your approvals, an eager AI will happily build on an unexamined design, a vague plan, or a silently broken sample. The correction is a gate for each object of the work, in the order the work happens. The design meets a hostile referee before it can freeze (4.1). Vague requests are stopped and resolved into requirements (4.2), the plan is then written so precisely it cannot be misread (4.3), and an independent reviewer must pass it before anything runs (4.4). Execution inherits the same discipline: the data is validated before analysis touches it (4.5), and every regression is checked against the signs the locked goal predicted (4.6). What the agents produce is then fixed before you see it — drafts loop through an adversarial critic (4.7) scored on one shared scale (4.8), and repeated failures are escalated by root cause rather than patched forever (4.9). Even the feedback you give is harnessed: your comments become a checklist verified applied (4.10), and promises made to referees are audited line by line against the actual paper (4.11). Around it all, overnight runs advance only through gates that pass (4.12), and a sandbox marks the one place the bar deliberately drops (4.13).",
+    items: [
+    { id: "design-debate", name: "A hostile referee before you commit",
+      role: "gate 1: the design, attacked pre-freeze",
+      why: "By the time Referee 2 attacks your identification, you've spent a year on the paper. The attack is cheap insurance if it happens before the data is pulled.",
+      how: "Before any design freezes, two agents argue it in parallel: one steelmans (strongest supporting logic and precedents), one prosecutes as a hostile referee (endogeneity, selection, power, measurement, interpretation — ranked by kill probability). The conductor must rule on every objection on the record: change the design, add a planned robustness check, or accept the risk with a reason. The ruling is written into the plan.",
+      ex: "Prosecution: \"institutions may simply select fast-discovery stocks.\" Ruling: matched-sample robustness added to the plan — eleven months before a referee could have said it.",
+      src: "plugin/commands/strategist.md" },
+    { id: "spec-then-plan", name: "Vague requests stopped at the door",
+      role: "gate 2: the ask, resolved before building",
+      why: "Vague requests produce confident wrong builds. 'Study the effect of X on Y' has five defensible interpretations, and an agent will pick one silently.",
+      how: "For any ambiguous task, the conductor first writes a requirements list in three tiers — must-have, should-have, nice-to-have — with each requirement marked as confirmed by you, assumed and flagged for override, or blocked pending your answer. You approve the requirements before any plan exists, and every later plan step must trace back to one.",
+      ex: "Three clarifying questions up front — outcome horizon, treatment definition, sample era — replace three days of building the wrong panel.",
+      src: "plugin/skills/spec-then-plan/" },
+    { id: "plans-as-contracts", name: "Plans too precise to misread",
+      role: "gate 3: the plan's language, nothing left to interpret",
+      why: "Subagents fail at interpretation, not execution. A plan that says 'add appropriate controls' delegates the research design to whichever model runs it.",
+      how: "Plans must be executable without interpretation: exact column names, exact file paths, exact formulas, expected row counts, step gates, and completion criteria per step. The words 'appropriate', 'reasonable', 'similar to', and 'standard approach' are explicitly banned. And execution must report back against the same contract: every numbered step is marked done, gated, or skipped-with-reason in an audit table — silently omitting a step is a protocol violation.",
+      ex: "Not \"construct local ownership\"; instead \"ownership share held by institutions headquartered within 100km ÷ total institutional value; expect ~186K treated firm-quarters; step 4 is gated on this file existing with these columns.\"",
+      src: "plugin/commands/strategist.md" },
+    { id: "plan-review-gate", name: "Every plan reviewed before it runs",
+      role: "gate 4: an independent pass, or no execution",
+      why: "A flawed plan executed perfectly is the most expensive kind of failure — everything downstream is built on it.",
+      how: "Before any conductor executes a plan, a top-tier reviewer agent audits it against the contract standard: flag vague language, missing column definitions, missing gates, missing completion criteria. The review must return PASS; on FAIL the plan is revised and re-reviewed. Only then does a cheaper model get to run it.",
+      ex: "The reviewer bounces a plan because step 6 says \"merge as usual.\" Two minutes of tightening beats a rebuilt sample next week.",
+      src: "plugin/commands/strategist.md" },
+    { id: "data-sentinel", name: "Data validated before analysis",
+      role: "gate 5: the sample, proven before use",
+      why: "Wrong data poisons everything downstream, and merge disasters are silent: the code runs, the rows just quietly aren't what you think.",
+      how: "Before any sample is blessed for analysis, a read-only validator checks completeness, coverage, merge rates, duplicate keys, and value ranges against the plan's expected counts. In extraction, every phase runs an implement → validate → document cycle, and the validator's verdict — approved, needs revision, or failed — decides whether the cycle advances, repeats, or stops for you.",
+      ex: "\"Merge coverage 98.4%; the 1.6% unmatched concentrate pre-1999 — consistent with the linking table's known start. Row count 186,412 vs the plan's ~186K. APPROVED.\"",
+      src: "plugin/agents/SS-Sentinel.md" },
+    { id: "sign-self-check", name: "Every sign checked against theory",
+      role: "gate 6: the numbers, vs what the goal predicted",
+      why: "A regression that 'ran successfully' can still contradict the theory it was meant to test — and an agreeable assistant may bury that in row 40 of a log.",
+      how: "After every regression, the executor compares each estimated sign against the charter's expected sign and reports consistent, consistent-but-insignificant, or contradicts — with an overall flag that can force a stop. Contradictions must be surfaced with the exact coefficient; hiding them is a protocol violation. Verdicts feed the belief ledger in system 3.",
+      ex: "\"H3: expected +, estimated −0.003 (t = −0.45) → CONTRADICTS. Review required.\" You hear about it in the phase report, not from a referee.",
+      src: "plugin/skills/hypothesis-check/" },
+    { id: "critic-fix-loop", name: "Drafts fixed before they reach you",
+      role: "gate 7: the deliverable, criticized and repaired in-loop",
+      why: "First drafts — of tables, sections, response letters — ship with known classes of defects. Handing you a flawed deliverable to catch is outsourcing quality control to the busiest person in the system.",
+      how: "At every phase gate, an adversarial critic scores the deliverable on the shared scale (next feature). Below the bar, the exact findings — nothing else — go to the owning agent with a no-scope-creep instruction; the critic re-verifies each finding as fixed, partial, not fixed, or regressed. The loop runs to approval or a hard cap of three rounds, after which it escalates to you with the remaining issues. More than five critical issues in one round aborts the loop — that deliverable needs rework, not patching.",
+      ex: "A results section goes 78 → 91 across two rounds: the critic caught an unsupported claim and a mislabeled column; the drafter fixed exactly those; you see only the approved version plus a two-line diff summary.",
+      src: "plugin/skills/critical-review-loop/" },
+    { id: "scoring-rubric", name: "One scoring scale for every review",
+      role: "the yardstick all the gates share",
+      why: "\"Looks good\" is not a standard. Review without a shared severity scale produces verdicts that drift with the reviewer's mood.",
+      how: "Every review starts at 100 and deducts: −20 per critical issue (wrong specification, data leak, identification failure), −5 per major (missing clustered standard errors, wrong sample period), −1 per minor (formatting). 90+ passes; below 60 fails outright. Numeric reproduction tolerances are pinned too: point estimates and standard errors to four decimals, sample sizes exact.",
+      ex: "A reproduced table matching to 3 decimals instead of 4 is a finding, not a shrug — because the tolerance was written down before anyone ran anything.",
+      src: "plugin/skills/quality-scoring/" },
+    { id: "debug-escalation", name: "Bugs fixed at the root, not the symptom",
+      role: "failures escalate by cause, never patched forever",
+      why: "Agents will happily patch the same underlying bug sixteen times under sixteen surface symptoms — each patch 'works' and the next job fails anyway.",
+      how: "Failures are tracked by root-cause class, not symptom, with a counter that survives context resets. Attempt two forces an audit of all similar call sites before any fix; attempt three halts the loop and dispatches the critic for a structural diagnosis — patch versus root fix — presented to you with options. Two same-class failures trigger pattern detection before any retry, and overnight mode never bypasses the round-three halt.",
+      ex: "Sixteen jobs fail on 'column not found' — different columns each time. Root cause: the database driver returns raw bytes for text columns. One structural fix, sixteen jobs green.",
+      src: "plugin/skills/critical-review-loop/" },
+    { id: "feedback-checklist", name: "Your comments, verified applied",
+      role: "even your feedback gets a gate",
+      why: "The politest failure mode: you give six comments, get back \"done!\", and three of them were quietly missed. In a long project those losses compound into a draft that stopped listening to you.",
+      how: "During polish, every reviewer finding and every comment you make in-session is parsed into a flat checklist file. The phase cannot close until each row is verified applied — checked against the actual manuscript — or carries your explicit override. Acknowledgment is not application; the verification step is what closes the row.",
+      ex: "\"Rephrase the abstract, shrink Table 3, cite the 2024 deposit paper\" → three checklist rows. The verification pass finds Table 3 unchanged → the row stays open and the phase stays open with it.",
+      src: "plugin/commands/pw-editor.md" },
+    { id: "revision-audit", name: "Response letters audited line by line",
+      role: "the promises to referees, verified in the paper",
+      why: "The classic revision failure: the response letter promises a change the paper doesn't contain. Referees notice, and it reads as bad faith.",
+      how: "Before a revision package closes, a read-only auditor takes every claim in the response document — 'we added Table R.1', 'we now control for Z' — and verifies it against the actual manuscript. It must end its report with a hard verdict: approved (zero missing claims) or hold. On hold, discrepancies are fixed and re-audited, at most twice; still failing, it halts and puts the remaining gaps to you — proceed only by explicit, recorded override.",
+      ex: "Auditor: \"Response §2.3 claims a matched-sample appendix; the paper has no Appendix C. VERDICT: HOLD.\" Caught in-house, not in the decision letter.",
+      src: "plugin/agents/Rev-Auditor.md" },
+    { id: "overnight-mode", name: "Overnight runs that know when to stop",
+      role: "automation only through gates that pass",
+      why: "Half the pipeline is routine once the design is locked — but 'fully autonomous' is exactly wrong for research, where one silent bad call compounds.",
+      how: "An auto-proceed flag makes mandatory stops conditional: the pipeline continues on its own only while every validator passes, the critic loop (if on) ended approved, and no new open questions appeared. Every auto-approval is logged for your morning review — and anything touching the locked design still stops and waits, flag or no flag.",
+      ex: "You start the analysis phase at 11pm in overnight mode with the critic on. By morning: sample built, validated, three table batches run and sign-checked, one stop pending — a genuine judgment call about a fragile hypothesis.",
+      src: "plugin/skills/critical-review-loop/" },
+    { id: "exploration-sandbox", name: "A sandbox for quick experiments",
+      role: "the one marked place the bar drops",
+      why: "Full process on every feasibility poke would strangle curiosity — but letting exploratory hacks leak into production code is how untracked results end up in papers.",
+      how: "An explorations folder runs with a lower quality bar, no plan approval, no mandatory stops — and hard walls: raw data stays read-only, nothing merges into production scripts, and every exploration must end the session with a verdict: graduate into a real plan, archive with findings written down, or kill.",
+      ex: "An afternoon testing an alternative factor construction ends archived: \"no incremental fit beyond the base set — notes kept.\" Negative result saved; production untouched.",
+      src: "plugin/skills/exploration-mode/" }
+  ]},
+
+  { g: "Let it learn your field", slug: "learn-field",
+    goal: "Does it get better? Every run distills what it learned into the harness itself — the part no CLAUDE.md can do.",
+    story: "The pain is paying for the same lesson twice: the fix that took three attempts tonight evaporates when the session ends, and next month you debug it again. The correction is a learning loop that tightens the harness after every run. Each phase closes with an automatic sweep that captures what took real effort and then verified (5.1); a four-question gate decides what deserves to become permanent, so the library stays sharp instead of bloated (5.2). The output is a growing set of guards — encoded mistakes that can never bite again (5.3). This only scales because of the architecture: procedures live in trigger-keyed skills rather than one flat instruction file that the model eventually skims (5.4), and standing hygiene rules keep old learning from burying new (5.5). This system is why your factory ends up different from mine — it learns your database's traps and your methods' failure modes, not generic advice.",
+    items: [
+    { id: "learn-distillation", name: "Hard-won fixes saved as skills",
+      role: "captures what the run taught, automatically",
+      why: "The hardest-won knowledge in agent work — the fix that took three attempts, the workaround for a database quirk — evaporates when the session ends, and next month you pay for it again.",
+      how: "Every conductor closes its phase with a distillation sweep, automatically: scan the run for multi-step procedures that took real trial-and-error and then verified; distill only from verified successes (failed paths go to the lessons file, never the library); check the existing library first and update rather than duplicate; then write the skill and report one line — \"Distilled: {name}\" or \"no candidates\". A manual command does the same for a single discovery mid-task.",
+      ex: "Getting Stata to run unattended and fail loudly took a full debugging session once. It's now a skill; the procedure has been free ever since.",
+      src: "plugin/skills/learn/" },
+    { id: "skill-gate-check", name: "Four questions before anything is saved",
+      role: "filters what deserves to become permanent",
+      why: "A skill library's failure mode is bloat: a hundred near-duplicate, episode-specific entries that dilute retrieval until nothing triggers.",
+      how: "Four questions gate every candidate: genuinely non-obvious? reusable beyond this project? stable against the next software update? expressible in under a page? Any 'no' sends it to the lessons file instead. What is saved is the generalized procedure — project-specific paths and names stripped into parameters — and the description line is written trigger-rich, naming the symptoms and error strings that should activate it, because the description is the retrieval key.",
+      ex: "Not \"fix the C5 merge\" (an episode) and not \"data cleaning\" (mush) — \"CRSP-Compustat link duplicates: use when a merge inflates row counts or firm identifiers map many-to-many.\"",
+      src: "plugin/skills/learn/" },
+    { id: "self-taught-guards", name: "Mistakes that can never repeat",
+      role: "the visible output: a growing wall of guards",
+      why: "Econometric traps are recurring and subtle — the kind of thing you catch once at 2am and must never rely on remembering again.",
+      how: "The learning loop's output is a set of guard skills that auto-trigger on their symptoms. The public plugin ships sixteen; my private factory has taught itself twenty-two and counting. Each encodes one trap: when it bites, what it looks like, the structural fix, and how to verify the fix worked.",
+      ex: "A bootstrap method refusing multi-way fixed effects; a corrected p-value inflated by a handful of degenerate draws; a 'did they revise' flag that fires on re-affirmation rather than change; a frozen dataset whose builder can't reproduce its own output. Each cost one bad day, once.",
+      src: "plugin/skills/wild-cluster-boottest-multiway-fe/" },
+    { id: "beyond-claude-md", name: "Why a single CLAUDE.md isn't enough",
+      role: "the architecture that lets learning scale",
+      why: "One flat instruction file is always loaded, never indexed, and grows until the model skims it. Preferences survive that; procedures don't.",
+      how: "The factory splits knowledge across four mechanisms by job: a one-page contract file (the constitution — the only always-loaded piece), skills (procedures with trigger conditions, loaded only when their symptoms match), hooks (rules enforced by code, immune to forgetting), and memory files (evolving project state under write rules). See the comparison table in the build-your-own section below.",
+      ex: "My table-formatting standards would be twelve paragraphs of dead weight in every context window. As a skill, they cost nothing until an agent emits a table — then all twelve paragraphs arrive at once.",
+      src: "plugin/skills/" },
+    { id: "library-hygiene", name: "A library that stays sharp",
+      role: "old learning never buries new",
+      why: "Skills rot: software changes, better procedures emerge, near-duplicates accumulate. A library nobody prunes becomes a library nothing triggers from.",
+      how: "Standing rules: search before creating — refine an existing skill rather than fork a variant; merge overlapping skills; mark outdated procedures deprecated with the reason; keep the library small enough that every description earns its trigger.",
+      ex: "A new discovery about batch Stata runs updates the existing skill instead of spawning a \"version 2\" — so the trigger stays sharp and there is exactly one place to trust.",
+      src: "plugin/skills/learn/" }
+  ]},
+
+  { g: "Stay in command", slug: "stay-command",
+    goal: "Who commands? You — hard rules run as code, every gate ends at your desk, in your language.",
+    story: "Everything above restricts what the agents may do; this system settles who they answer to. The pain it corrects is the slow inversion where the human becomes the tool's assistant — rubber-stamping output they can barely read. The correction starts at the gates: nothing consequential ships without your explicit yes (6.1), and the rules too important to trust to model discipline run as code on every tool call, immune to forgetting (6.2). What reaches you is harnessed too: reports must arrive in plain economics, with your requests answered one by one, so command doesn't cost you an hour of reading (6.3). The same translation extends outward — your co-author sees the science and never the machinery (6.4) — and even the papers themselves are written in your voice, learned from your own publications (6.5). The last piece keeps command permanent: the whole system runs in your tools and is written in plain files you can fork, so it can never hold your workflow hostage (6.6).",
+    items: [
+    { id: "mandatory-stops", name: "Nothing ships without your yes",
+      role: "every consequential decision stays with you",
+      why: "Full autonomy is the wrong goal for research: a wrong autonomous decision at the design stage compounds through every downstream phase, and you own the result under your name.",
+      how: "Every phase ends at a gate that only you can open: the design cannot lock, the formulas cannot freeze, tables cannot ship, the co-author cannot be messaged without explicit approval. Overnight mode automates the routine validations in between — never the judgment calls.",
+      ex: "The analysis phase ends with tables presented and a one-line question: \"H3 is fragile under industry-year fixed effects — feature it with caveats, or demote it to the appendix?\" That decision was never going to be delegated.",
+      src: "plugin/commands/da-conductor.md" },
+    { id: "guard-hooks", name: "Rules that run as code, not requests",
+      role: "restriction that cannot be forgotten",
+      why: "Some failures are too costly to leave to model discipline: overwritten raw data, a heavy job launched on a cluster login node, hours of progress vaporized by a crash or a context compaction.",
+      how: "Nine small programs run on the session's lifecycle events — before writes (raw-data protection), before shell commands (cluster login-node guard), after edits (verification reminders), at every stop (state checkpoint, logging), before context compaction (snapshot), at session start (restore). They execute as code on every event; there is nothing for the model to forget.",
+      ex: "An agent tries to 'fix' a file inside the raw-data folder. The hook blocks the write before it happens and instructs it to derive into the processed folder instead. That rule has never once depended on the agent's memory.",
+      src: "plugin/hooks/scripts/" },
+    { id: "communication-contract", name: "Reports in plain economics",
+      role: "command doesn't cost you an hour of reading",
+      why: "Agent output drifts toward its own internal register — dense, bolded, jargon-loaded — until reading reports becomes work. And long replies bury the one thing you actually asked.",
+      how: "A house-style contract, re-injected by a hook on every single prompt, governs how conductors speak: lead with the economic meaning, prose over bullet walls, anything longer than a screen goes to a file with a one-paragraph verdict in chat, and every execution reply ends with a closing digest — each of your requests quoted and answered one by one, with evidence, so you can read only the end. Decision questions must be phrased so a co-author could answer them: plain-outcome options with costs, a visible recommendation, and no internal codenames.",
+      ex: "Not \"T11 gate FAIL, hi_closeness measure-dependent — re-freeze?\" but \"the result holds only under the broader definition of rival funds; we can report both (half a day) or pick one and defend it — I recommend both.\"",
+      src: "plugin/skills/house-style/" },
+    { id: "coauthor-channel", name: "Co-authors see science, not machinery",
+      role: "the harness translates outward too",
+      why: "Your co-author does not want your pipeline; they want the economics. Forwarding raw agent output at them is noise, and hand-writing status memos every week is a tax that stops getting paid.",
+      how: "A dedicated conductor maintains a shared workspace page — one big-picture memo plus mirror tables for hypotheses, results, and decisions — with a hard curtain: pure economics goes out, no file names or pipeline mechanics; their comments come back and are translated into decision-log entries and task cards. Two one-way flows, so nothing merges and nothing conflicts. You approve every memo before it publishes, and a co-author challenge to a locked hypothesis pauses everything — even overnight mode.",
+      ex: "Sunday sync: the memo reports the fragile hypothesis in referee-grade prose; Monday their comment \"try excluding the crisis years\" comes back as a task card and a decision-log entry, awaiting your call.",
+      src: "plugin/commands/cc-conductor.md" },
+    { id: "house-style-code", name: "Papers written in your voice",
+      role: "even the prose is harnessed to your identity",
+      why: "AI drafts default to AI voice — and a paper's voice, table conventions, and structural habits are part of a researcher's identity that generic output erases.",
+      how: "The house-style skill encodes a specific author's manuscript conventions — learned from my published papers: section rhythm, hedging norms, table architecture, equation and appendix conventions, banned AI-tone patterns. Per-project style files layer journal-specific deviations on top. Replace my reference papers with yours and the drafter writes in your voice instead.",
+      ex: "The drafter's output opens with the economic finding, enumerates arguments inside prose, and formats tables to my standards — because the skill quotes my own papers back at it as ground truth.",
+      src: "plugin/skills/house-style/" },
+    { id: "works-where-you-work", name: "Runs in your tools, forkable in Markdown",
+      role: "command is permanent — nothing is locked in",
+      why: "A research system you must leave your environment to use will stop being used. And a system you cannot modify is someone else's workflow, permanently.",
+      how: "The factory runs on any Claude Code surface — terminal or VS Code — on top of your existing tools: WRDS and APIs, Stata and Python, computing clusters, LaTeX, Google Scholar, Notion. And every component is plain Markdown under version control: fork it, edit the prose, and the system behaves differently. There is no configuration language to learn.",
+      ex: "Adapting the analysis department to R is not a feature request to me — it is an afternoon of editing two agent files and one skill in your own fork.",
+      src: "README.md" }
+  ]}
+  ];
+
+  /* ---------- render ---------- */
+  var itemsHost = document.getElementById("rf-items");
+  var detail = document.getElementById("rf-detail");
+  var filter = document.getElementById("rf-filter");
+  var flat = [];
+  var pinnedKey = null;
+  var mq = window.matchMedia("(max-width: 900px)");
+
+  GROUPS.forEach(function (grp, gi) {
+    grp.num = gi + 1;
+    var hb = document.createElement("button");
+    hb.className = "rf-group-btn";
+    hb.type = "button";
+    hb.id = "gbtn-" + grp.slug;
+    hb.textContent = grp.num + " · " + grp.g;
+    itemsHost.appendChild(hb);
+    var tag = document.createElement("div");
+    tag.className = "rf-group-tag";
+    tag.textContent = grp.goal;
+    itemsHost.appendChild(tag);
+    var gacc = document.createElement("div");
+    gacc.className = "rf-acc-detail";
+    itemsHost.appendChild(gacc);
+    var wrap = document.createElement("div");
+    wrap.className = "rf-chainwrap";
+    itemsHost.appendChild(wrap);
+    grp.btn = hb; grp.tag = tag; grp.acc = gacc; grp.wrap = wrap;
+
+    hb.addEventListener("mouseenter", function () { if (!mq.matches && pinnedKey === null) showGroup(grp, false); });
+    hb.addEventListener("focus", function () { if (!mq.matches && pinnedKey === null) showGroup(grp, false); });
+    hb.addEventListener("click", function () {
+      if (mq.matches) { toggleAccGroup(grp); }
+      else {
+        if (pinnedKey === "g-" + grp.slug) { pinnedKey = null; hb.classList.remove("pinned"); }
+        else { setPin("g-" + grp.slug); hb.classList.add("pinned"); showGroup(grp, true); }
+      }
+    });
+
+    grp.items.forEach(function (f, fi) {
+      f.group = grp; f.label = grp.num + "." + (fi + 1);
+      var b = document.createElement("button");
+      b.className = "rf-item";
+      b.id = "btn-" + f.id;
+      b.type = "button";
+      b.innerHTML = '<span class="rf-num">' + f.label + "</span>" + f.name;
+      b.setAttribute("aria-expanded", "false");
+      wrap.appendChild(b);
+      var acc = document.createElement("div");
+      acc.className = "rf-acc-detail";
+      wrap.appendChild(acc);
+      f.btn = b; f.acc = acc;
+      flat.push(f);
+      b.addEventListener("mouseenter", function () { if (!mq.matches && pinnedKey === null) showFeature(f, false); });
+      b.addEventListener("focus", function () { if (!mq.matches && pinnedKey === null) showFeature(f, false); });
+      b.addEventListener("click", function () {
+        if (mq.matches) { toggleAccFeature(f); }
+        else {
+          if (pinnedKey === "f-" + f.id) { pinnedKey = null; b.classList.remove("pinned"); }
+          else { setPin("f-" + f.id); b.classList.add("pinned"); showFeature(f, true); }
+        }
+      });
+    });
+  });
+
+  function setPin(key) {
+    pinnedKey = key;
+    flat.forEach(function (o) { o.btn.classList.remove("pinned"); });
+    GROUPS.forEach(function (g) { g.btn.classList.remove("pinned"); });
+  }
+  function clearActive() {
+    flat.forEach(function (o) { o.btn.classList.remove("active"); });
+    GROUPS.forEach(function (g) { g.btn.classList.remove("active"); });
+  }
+  function gotoFeature(f) {
+    if (mq.matches) { toggleAccFeature(f); f.btn.scrollIntoView(); }
+    else { setPin("f-" + f.id); f.btn.classList.add("pinned"); showFeature(f, true); }
+  }
+  function gotoGroup(g) {
+    if (mq.matches) { toggleAccGroup(g); g.btn.scrollIntoView(); }
+    else { setPin("g-" + g.slug); g.btn.classList.add("pinned"); showGroup(g, true); }
+  }
+  function featureHTML(f) {
+    var i = flat.indexOf(f);
+    var nav = '<div class="rf-next">';
+    nav += '<button type="button" data-goto="g:' + f.group.slug + '">↺ System ' + f.group.num + " overview</button>";
+    if (i + 1 < flat.length) {
+      var n = flat[i + 1];
+      var lbl = (n.group === f.group)
+        ? "Next: " + n.label + " " + n.name + " →"
+        : "Next system: " + n.group.num + " · " + n.group.g + " →";
+      var tgt = (n.group === f.group) ? "f:" + n.id : "g:" + n.group.slug;
+      nav += '<button type="button" class="rf-next-main" data-goto="' + tgt + '">' + lbl + "</button>";
+    }
+    nav += "</div>";
+    return '<div class="rf-d-group">System ' + f.group.num + " · " + f.group.g + "</div>" +
+      "<h3>" + f.label + " — " + f.name + "</h3>" +
+      '<div class="rf-role"><b>In the chain:</b> ' + f.role + "</div>" +
+      '<div class="rf-block"><b class="rf-lab">The pain</b><p>' + f.why + "</p></div>" +
+      '<div class="rf-block"><b class="rf-lab">The harness</b><p>' + f.how + "</p></div>" +
+      '<div class="rf-block rf-ex"><b class="rf-lab">In practice</b><p>' + f.ex + "</p></div>" +
+      '<div class="rf-src">source: <a href="' + REPO + f.src + '" target="_blank" rel="noopener">' + f.src + "</a></div>" +
+      nav;
+  }
+  function groupHTML(grp) {
+    var chain = "";
+    grp.items.forEach(function (f) {
+      chain += '<li><button type="button" data-goto="f:' + f.id + '"><span class="cn">' + f.label + "</span>" +
+        f.name + ' <span class="cr">— ' + f.role + "</span></button></li>";
+    });
+    var nav = '<div class="rf-next"><button type="button" class="rf-next-main" data-goto="f:' + grp.items[0].id +
+      '">Start the chain: ' + grp.items[0].label + " " + grp.items[0].name + " →</button></div>";
+    return '<div class="rf-d-group">System ' + grp.num + " of " + GROUPS.length + "</div>" +
+      "<h3>" + grp.g + "</h3>" +
+      '<div class="rf-role"><b>The question it answers:</b> ' + grp.goal + "</div>" +
+      '<p class="rf-story">' + grp.story + "</p>" +
+      '<div class="rf-chain-h">The chain — each step hands off to the next</div>' +
+      '<ul class="rf-chain">' + chain + "</ul>" + nav;
+  }
+  function wireNav(host) {
+    var btns = host.querySelectorAll("[data-goto]");
+    Array.prototype.forEach.call(btns, function (cb) {
+      cb.addEventListener("click", function () {
+        var t = cb.getAttribute("data-goto");
+        if (t.indexOf("f:") === 0) {
+          flat.forEach(function (f) { if (f.id === t.slice(2)) gotoFeature(f); });
+        } else if (t.indexOf("g:") === 0) {
+          GROUPS.forEach(function (g) { if (g.slug === t.slice(2)) gotoGroup(g); });
+        }
+      });
+    });
+  }
+  function showFeature(f, setHash) {
+    detail.innerHTML = featureHTML(f);
+    clearActive(); f.btn.classList.add("active");
+    wireNav(detail);
+    if (setHash && history.replaceState) history.replaceState(null, "", "#f-" + f.id);
+  }
+  function showGroup(grp, setHash) {
+    detail.innerHTML = groupHTML(grp);
+    clearActive(); grp.btn.classList.add("active");
+    wireNav(detail);
+    if (setHash && history.replaceState) history.replaceState(null, "", "#g-" + grp.slug);
+  }
+  function closeAllAcc() {
+    flat.forEach(function (o) { o.acc.classList.remove("open"); o.btn.classList.remove("active"); o.btn.setAttribute("aria-expanded", "false"); });
+    GROUPS.forEach(function (g) { g.acc.classList.remove("open"); g.btn.classList.remove("active"); });
+  }
+  function toggleAccFeature(f) {
+    var open = f.acc.classList.contains("open");
+    closeAllAcc();
+    if (!open) {
+      f.acc.innerHTML = featureHTML(f);
+      f.acc.classList.add("open");
+      f.btn.classList.add("active");
+      f.btn.setAttribute("aria-expanded", "true");
+      wireNav(f.acc);
+      if (history.replaceState) history.replaceState(null, "", "#f-" + f.id);
+    }
+  }
+  function toggleAccGroup(grp) {
+    var open = grp.acc.classList.contains("open");
+    closeAllAcc();
+    if (!open) {
+      grp.acc.innerHTML = groupHTML(grp);
+      grp.acc.classList.add("open");
+      grp.btn.classList.add("active");
+      wireNav(grp.acc);
+      if (history.replaceState) history.replaceState(null, "", "#g-" + grp.slug);
+    }
+  }
+
+  filter.addEventListener("input", function () {
+    var q = filter.value.trim().toLowerCase();
+    GROUPS.forEach(function (grp) {
+      var any = false;
+      grp.items.forEach(function (f) {
+        var hit = !q || (f.name + " " + f.role + " " + f.why + " " + f.how + " " + f.ex).toLowerCase().indexOf(q) > -1;
+        f.btn.style.display = hit ? "" : "none";
+        f.acc.style.display = hit ? "" : "none";
+        if (hit) any = true;
+      });
+      var g = !q || any || grp.g.toLowerCase().indexOf(q) > -1;
+      grp.btn.style.display = g ? "" : "none";
+      grp.tag.style.display = g ? "" : "none";
+      grp.wrap.style.display = g ? "" : "none";
+    });
+  });
+
+  /* deep link or default */
+  var opened = false;
+  if (location.hash) {
+    if (location.hash.indexOf("#f-") === 0) {
+      var want = location.hash.slice(3);
+      flat.forEach(function (f) {
+        if (f.id === want) {
+          opened = true;
+          if (mq.matches) { toggleAccFeature(f); f.btn.scrollIntoView(); }
+          else { setPin("f-" + f.id); f.btn.classList.add("pinned"); showFeature(f, false); }
+        }
+      });
+    } else if (location.hash.indexOf("#g-") === 0) {
+      var wg = location.hash.slice(3);
+      GROUPS.forEach(function (g) {
+        if (g.slug === wg) {
+          opened = true;
+          if (mq.matches) { toggleAccGroup(g); g.btn.scrollIntoView(); }
+          else { setPin("g-" + g.slug); g.btn.classList.add("pinned"); showGroup(g, false); }
+        }
+      });
+    }
+  }
+  if (!opened && !mq.matches) showGroup(GROUPS[0], false);
+  document.getElementById("rf-hint").textContent = GROUPS.length + " systems · " + flat.length + " features · hover to preview · click to pin";
+})();
+</script>
+</div>
