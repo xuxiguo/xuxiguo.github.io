@@ -35,9 +35,9 @@
             @media (min-width: 992px) {
                 body { padding-left: 3.6rem; }
                 #sideNav { width: 3.6rem; transition: width .25s ease; overflow: hidden; }
-                #sideNav .navbar-brand { margin: 0 auto; padding: .8rem 0 .4rem; }
+                #sideNav .navbar-brand { display: block; width: 100%; margin: 0; padding: 0; height: 2.8rem; position: relative; }
                 #sideNav .navbar-brand > span.d-none.d-lg-block { display: none !important; }
-                #sideNav .brand-mini { display: block; width: 100%; text-align: center; font-size: 1.15rem; color: rgba(255,255,255,.85); }
+                #sideNav .brand-mini { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1.1rem; color: rgba(255,255,255,.85); }
                 #sideNav .navbar-nav, #sideNav .navbar-nav .nav-item { width: 100%; }
                 #sideNav .navbar-nav .nav-item .nav-link { position: relative; text-align: center; padding: .55rem .5rem; white-space: nowrap; }
                 #sideNav .nav-ic { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1rem; opacity: 1; transition: opacity .15s ease; }
@@ -45,6 +45,9 @@
                 #sideNav:hover { width: 17rem; box-shadow: 0 .5rem 2rem rgba(0,0,0,.35); }
                 #sideNav:hover .nav-ic { opacity: 0; }
                 #sideNav:hover .nav-txt { opacity: 1; }
+                /* center the reading column in the width the slim rail frees up */
+                section.resume-section { margin-left: auto; margin-right: auto; }
+                .blog-content { margin-left: auto; margin-right: auto; }
             }
         </style>
         {% endif %}
