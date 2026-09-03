@@ -22,6 +22,29 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap) -->
         <link href="{{ '/css/styles.css' | relative_url }}" rel="stylesheet" />
+        <style>
+            .brand-mini { display: none; }
+            #sideNav .nav-ic { display: inline-block; width: 1.35rem; text-align: center; margin-right: .5rem; }
+        </style>
+        {% if page.layout == 'post' or page.is_blog or page.slim_nav %}
+        <style>
+            /* Slim sidebar for reading pages: icons only, expand on hover, no photo */
+            @media (min-width: 992px) {
+                body { padding-left: 4.5rem; }
+                #sideNav { width: 4.5rem; transition: width .25s ease; overflow: hidden; }
+                #sideNav .navbar-brand > span.d-none.d-lg-block { display: none !important; }
+                #sideNav .brand-mini { display: block; text-align: center; font-size: 1.25rem; padding: .35rem 0 .9rem; color: rgba(255,255,255,.85); }
+                #sideNav .navbar-nav, #sideNav .navbar-nav .nav-item { width: 100%; }
+                #sideNav .navbar-nav .nav-link { text-align: center; padding: .55rem .25rem; white-space: nowrap; }
+                #sideNav .nav-ic { width: 100%; margin-right: 0; font-size: 1.05rem; }
+                #sideNav .nav-txt { display: none; }
+                #sideNav:hover { width: 17rem; box-shadow: 0 .5rem 2rem rgba(0,0,0,.35); }
+                #sideNav:hover .nav-txt { display: inline; margin-left: .55rem; }
+                #sideNav:hover .nav-ic { width: 1.35rem; }
+                #sideNav:hover .navbar-nav .nav-link { text-align: left; padding: .55rem 1rem; }
+            }
+        </style>
+        {% endif %}
         {% if page.layout == 'post' or page.is_blog %}
         <style>
             .blog-content { max-width: 800px; }
@@ -43,6 +66,7 @@
             <a class="navbar-brand{% if page.is_home %} js-scroll-trigger{% endif %}" href="{% if page.is_home %}#page-top{% else %}{{ '/' | relative_url }}{% endif %}">
                 <span class="d-block d-lg-none">{{ site.data.content.personal.displayName }}</span>
                 <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ '/' | relative_url }}{{ site.data.content.personal.profileImage }}" alt="..." /></span>
+                <span class="brand-mini"><i class="fas fa-home"></i></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -50,14 +74,14 @@
                     {% for item in site.data.content.navigation %}
                     <li class="nav-item">
                         {% if page.is_home %}
-                        <a class="nav-link js-scroll-trigger" href="#{{ item.id }}">{{ item.label }}</a>
+                        <a class="nav-link js-scroll-trigger" href="#{{ item.id }}">{% if item.icon %}<i class="nav-ic {{ item.icon }}"></i>{% endif %}<span class="nav-txt">{{ item.label }}</span></a>
                         {% else %}
-                        <a class="nav-link" href="{{ '/' | relative_url }}#{{ item.id }}">{{ item.label }}</a>
+                        <a class="nav-link" href="{{ '/' | relative_url }}#{{ item.id }}">{% if item.icon %}<i class="nav-ic {{ item.icon }}"></i>{% endif %}<span class="nav-txt">{{ item.label }}</span></a>
                         {% endif %}
                     </li>
                     {% endfor %}
                     <li class="nav-item">
-                        <a class="nav-link{% if page.is_blog or page.layout == 'post' %} active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
+                        <a class="nav-link{% if page.is_blog or page.layout == 'post' %} active{% endif %}" href="{{ '/blog/' | relative_url }}"><i class="nav-ic fas fa-pen-nib"></i><span class="nav-txt">Blog</span></a>
                     </li>
                 </ul>
             </div>

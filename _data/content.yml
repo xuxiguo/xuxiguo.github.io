@@ -40,14 +40,19 @@ socialLinks:
 navigation:
   - id: "about"
     label: "About"
+    icon: "fas fa-user"
   - id: "research"
     label: "Research"
+    icon: "fas fa-book-open"
   - id: "factory"
-    label: "AI Research Factory"
+    label: "AI Research Orchestra"
+    icon: "fas fa-robot"
   - id: "teaching"
     label: "Teaching"
+    icon: "fas fa-chalkboard-teacher"
   - id: "cases"
     label: "Blockchain Cases"
+    icon: "fas fa-cubes"
 
 research:
   publications:

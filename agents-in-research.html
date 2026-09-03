@@ -1,8 +1,9 @@
 ---
 layout: default
 title: "Agents in Research | Norman (Xuxi) Guo"
-description: "How to run empirical research with AI agents — and build your own research factory. A tour and manual of the open-source Research Factory plugin for Claude Code."
-permalink: /agents_in_research_2026-09/
+description: "How to run empirical research with AI agents — and conduct a research orchestra of your own. A tour and manual of the open-source Research Orchestra plugin for Claude Code."
+permalink: /agents-in-research/
+slim_nav: true
 ---
 <div class="container-fluid p-0">
 <style>
@@ -123,7 +124,7 @@ permalink: /agents_in_research_2026-09/
     <p class="rf-lead">Over the past year I rebuilt my empirical research pipeline around AI agents — not a chatbot
       that answers questions, but an organized system that pulls data, runs regressions, drafts sections, answers
       referees, and remembers everything between sessions. I packaged its core as the
-      <b>Research Factory</b>, an open-source plugin for Claude Code: an entire research department in your terminal,
+      <b>Research Orchestra</b>, an open-source plugin for Claude Code: an entire research department in your terminal,
       from rough idea to journal submission.</p>
     <p class="rf-lead">The premise behind every design choice is simple. <b>At the start of a big project, you are
       clearest about the goal.</b> Over the months that follow, an unharnessed AI drifts — it redefines variables,
@@ -157,7 +158,7 @@ permalink: /agents_in_research_2026-09/
     <h2>Why a harness, not a chat window</h2>
     <p class="rf-lead">A chat window is spectacular in the moment and structureless over the months a paper actually
       takes. Used naively for empirical research, it drifts off your goal in four specific, repeated ways — and each
-      one shaped a part of the factory:</p>
+      one shaped a part of the orchestra:</p>
     <div class="rf-grid2">
       <div class="rf-card"><h3>It forgets between sessions</h3>
         <p>Tuesday's sample filters are gone by Thursday. Every new conversation re-explains the project from scratch
@@ -252,7 +253,7 @@ permalink: /agents_in_research_2026-09/
 <section class="resume-section" id="atlas">
   <div class="resume-section-content">
     <h2>The feature atlas</h2>
-    <p class="rf-lead">The headline feature comes first: <b>the factory is an organization, not an assistant.</b> You
+    <p class="rf-lead">The headline feature comes first: <b>the orchestra is an organization, not an assistant.</b> You
       direct nine conductors; the conductors direct twenty-eight specialists; a separate audit bench reviews everything
       with read-only power. That department is what makes months of AI work fast — and fast is exactly why it needs a
       harness:</p>
@@ -332,12 +333,12 @@ permalink: /agents_in_research_2026-09/
 <!-- ================= BUILD YOUR OWN ================= -->
 <section class="resume-section" id="build">
   <div class="resume-section-content">
-    <h2>Build your own factory</h2>
+    <h2>Build your own orchestra</h2>
     <p class="rf-lead">The plugin you install is a <b>skeleton</b>: the organization chart, the memory schema, the
-      review loops, the guard hooks. The <b>muscle</b> is your field knowledge — and the factory's real trick is that
+      review loops, the guard hooks. The <b>muscle</b> is your field knowledge — and the orchestra's real trick is that
       it grows that muscle on its own. My copy has taught itself twenty-two guard skills from its own mistakes
       (sixteen ship in the public plugin); yours will learn different ones, because your data and your methods fail
-      differently. Six months in, your factory and mine will share a skeleton and disagree about everything else.
+      differently. Six months in, your orchestra and mine will share a skeleton and disagree about everything else.
       That is the design working.</p>
     <div class="rf-steps">
       <div class="rf-step"><div><h3>Install the skeleton, initialize one paper</h3>
@@ -355,7 +356,7 @@ permalink: /agents_in_research_2026-09/
       <div class="rf-step"><div><h3>Let it distill what you both learn</h3>
         <p>Every phase ends with a distillation sweep: anything that took real trial-and-error and then verified gets
         written down as a skill that auto-triggers next time. When your database's merge quirk or your method's
-        numerical trap bites once, it becomes a guard — and it never bites again. This is where your factory stops
+        numerical trap bites once, it becomes a guard — and it never bites again. This is where your orchestra stops
         being mine.</p></div></div>
       <div class="rf-step"><div><h3>Audit the memory, not the transcripts</h3>
         <p>Once a month, read three files: the charter (is the locked design still what you believe?), the belief
@@ -365,7 +366,7 @@ permalink: /agents_in_research_2026-09/
 
     <h3 style="margin-top:3rem; font-size:1.5rem;">Why this is more than a CLAUDE.md</h3>
     <p class="rf-lead">Most people's first move is to write one big instruction file and hope the model reads it. That
-      works for preferences; it cannot carry a discipline. The factory splits "teaching the machine" into four
+      works for preferences; it cannot carry a discipline. The orchestra splits "teaching the machine" into four
       mechanisms, each doing the one job it is good at:</p>
     <div class="rf-tablewrap">
     <table class="rf-table">
@@ -459,16 +460,16 @@ permalink: /agents_in_research_2026-09/
 <section class="resume-section" id="close">
   <div class="resume-section-content">
     <h2>Install it, break it, tell me what it should do next</h2>
-    <p class="rf-lead">The public plugin is the sanitized core of the factory I run every day, and it is deliberately
+    <p class="rf-lead">The public plugin is the sanitized core of the orchestra I run every day, and it is deliberately
       unfinished — because the finishing is yours to do, in your field. If you build one, I want to hear what it
       learned.</p>
     <div class="rf-links">
-      <a href="https://github.com/xuxiguo/research-factory-claude" target="_blank" rel="noopener">⭐ The Research Factory on GitHub</a>
+      <a href="https://github.com/xuxiguo/research-factory-claude" target="_blank" rel="noopener">⭐ The Research Orchestra on GitHub</a>
       <a href="https://xuxiguo.github.io/blog/">The blog series on agents</a>
       <a href="mailto:norman.guo@slu.edu">norman.guo@slu.edu</a>
     </div>
     <p class="rf-meta" style="margin-top:2rem">Norman (Xuxi) Guo &middot; Saint Louis University &middot; built with
-      Claude Code &middot; this page was produced by the factory's own tooling</p>
+      Claude Code &middot; this page was produced by the orchestra's own tooling</p>
   </div>
 </section>
 
@@ -632,7 +633,7 @@ permalink: /agents_in_research_2026-09/
     { id: "pipeline-map", name: "A live map of the whole project",
       role: "nobody — human or agent — plans blind",
       why: "Long projects sprawl: parallel tracks, revised plans, stages blocked on other stages. Neither you nor the agents can hold the whole graph in your head.",
-      how: "A pipeline file records every stage as a node with dependencies, revision chains, and status; a script renders it into a flowchart dashboard. Conductors read it on start and append to it on completion — and a bootstrap script can reconstruct the map for a project that predates the factory.",
+      how: "A pipeline file records every stage as a node with dependencies, revision chains, and status; a script renders it into a flowchart dashboard. Conductors read it on start and append to it on completion — and a bootstrap script can reconstruct the map for a project that predates the orchestra.",
       ex: "\"Pipeline shows 12 stages; current: robustness (in progress); next stage blocked, waiting on it.\" One glance replaces a scroll through months of plans.",
       src: "plugin/scripts/pipeline_dashboard.py" },
     { id: "build-registry", name: "Exactly one script per dataset",
@@ -729,7 +730,7 @@ permalink: /agents_in_research_2026-09/
 
   { g: "Let it learn your field", slug: "learn-field",
     goal: "Does it get better? Every run distills what it learned into the harness itself — the part no CLAUDE.md can do.",
-    story: "The pain is paying for the same lesson twice: the fix that took three attempts tonight evaporates when the session ends, and next month you debug it again. The correction is a learning loop that tightens the harness after every run. Each phase closes with an automatic sweep that captures what took real effort and then verified (5.1); a four-question gate decides what deserves to become permanent, so the library stays sharp instead of bloated (5.2). The output is a growing set of guards — encoded mistakes that can never bite again (5.3). This only scales because of the architecture: procedures live in trigger-keyed skills rather than one flat instruction file that the model eventually skims (5.4), and standing hygiene rules keep old learning from burying new (5.5). This system is why your factory ends up different from mine — it learns your database's traps and your methods' failure modes, not generic advice.",
+    story: "The pain is paying for the same lesson twice: the fix that took three attempts tonight evaporates when the session ends, and next month you debug it again. The correction is a learning loop that tightens the harness after every run. Each phase closes with an automatic sweep that captures what took real effort and then verified (5.1); a four-question gate decides what deserves to become permanent, so the library stays sharp instead of bloated (5.2). The output is a growing set of guards — encoded mistakes that can never bite again (5.3). This only scales because of the architecture: procedures live in trigger-keyed skills rather than one flat instruction file that the model eventually skims (5.4), and standing hygiene rules keep old learning from burying new (5.5). This system is why your orchestra ends up different from mine — it learns your database's traps and your methods' failure modes, not generic advice.",
     items: [
     { id: "learn-distillation", name: "Hard-won fixes saved as skills",
       role: "captures what the run taught, automatically",
@@ -746,13 +747,13 @@ permalink: /agents_in_research_2026-09/
     { id: "self-taught-guards", name: "Mistakes that can never repeat",
       role: "the visible output: a growing wall of guards",
       why: "Econometric traps are recurring and subtle — the kind of thing you catch once at 2am and must never rely on remembering again.",
-      how: "The learning loop's output is a set of guard skills that auto-trigger on their symptoms. The public plugin ships sixteen; my private factory has taught itself twenty-two and counting. Each encodes one trap: when it bites, what it looks like, the structural fix, and how to verify the fix worked.",
+      how: "The learning loop's output is a set of guard skills that auto-trigger on their symptoms. The public plugin ships sixteen; my private orchestra has taught itself twenty-two and counting. Each encodes one trap: when it bites, what it looks like, the structural fix, and how to verify the fix worked.",
       ex: "A bootstrap method refusing multi-way fixed effects; a corrected p-value inflated by a handful of degenerate draws; a 'did they revise' flag that fires on re-affirmation rather than change; a frozen dataset whose builder can't reproduce its own output. Each cost one bad day, once.",
       src: "plugin/skills/wild-cluster-boottest-multiway-fe/" },
     { id: "beyond-claude-md", name: "Why a single CLAUDE.md isn't enough",
       role: "the architecture that lets learning scale",
       why: "One flat instruction file is always loaded, never indexed, and grows until the model skims it. Preferences survive that; procedures don't.",
-      how: "The factory splits knowledge across four mechanisms by job: a one-page contract file (the constitution — the only always-loaded piece), skills (procedures with trigger conditions, loaded only when their symptoms match), hooks (rules enforced by code, immune to forgetting), and memory files (evolving project state under write rules). See the comparison table in the build-your-own section below.",
+      how: "The orchestra splits knowledge across four mechanisms by job: a one-page contract file (the constitution — the only always-loaded piece), skills (procedures with trigger conditions, loaded only when their symptoms match), hooks (rules enforced by code, immune to forgetting), and memory files (evolving project state under write rules). See the comparison table in the build-your-own section below.",
       ex: "My table-formatting standards would be twelve paragraphs of dead weight in every context window. As a skill, they cost nothing until an agent emits a table — then all twelve paragraphs arrive at once.",
       src: "plugin/skills/" },
     { id: "library-hygiene", name: "A library that stays sharp",
@@ -800,7 +801,7 @@ permalink: /agents_in_research_2026-09/
     { id: "works-where-you-work", name: "Runs in your tools, forkable in Markdown",
       role: "command is permanent — nothing is locked in",
       why: "A research system you must leave your environment to use will stop being used. And a system you cannot modify is someone else's workflow, permanently.",
-      how: "The factory runs on any Claude Code surface — terminal or VS Code — on top of your existing tools: WRDS and APIs, Stata and Python, computing clusters, LaTeX, Google Scholar, Notion. And every component is plain Markdown under version control: fork it, edit the prose, and the system behaves differently. There is no configuration language to learn.",
+      how: "The orchestra runs on any Claude Code surface — terminal or VS Code — on top of your existing tools: WRDS and APIs, Stata and Python, computing clusters, LaTeX, Google Scholar, Notion. And every component is plain Markdown under version control: fork it, edit the prose, and the system behaves differently. There is no configuration language to learn.",
       ex: "Adapting the analysis department to R is not a feature request to me — it is an afternoon of editing two agent files and one skill in your own fork.",
       src: "README.md" }
   ]}
