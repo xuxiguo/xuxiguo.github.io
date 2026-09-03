@@ -26,20 +26,21 @@
             .brand-mini { display: none; }
             .nav-ic { display: none; }
             @media (min-width: 992px) {
-                #sideNav .navbar-nav .nav-item .nav-link { text-align: right; white-space: nowrap; padding-right: 1.25rem; }
+                #sideNav .navbar-nav .nav-item .nav-link { white-space: nowrap; }
             }
         </style>
         {% if page.layout == 'post' or page.is_blog or page.slim_nav %}
         <style>
             /* Slim sidebar for reading pages: icon rail, cross-fades to text-only on hover, no photo */
             @media (min-width: 992px) {
-                body { padding-left: 4.5rem; }
-                #sideNav { width: 4.5rem; transition: width .25s ease; overflow: hidden; }
+                body { padding-left: 3.6rem; }
+                #sideNav { width: 3.6rem; transition: width .25s ease; overflow: hidden; }
+                #sideNav .navbar-brand { margin: 0 auto; padding: .8rem 0 .4rem; }
                 #sideNav .navbar-brand > span.d-none.d-lg-block { display: none !important; }
-                #sideNav .brand-mini { display: block; text-align: center; font-size: 1.25rem; padding: .35rem 0 .9rem; color: rgba(255,255,255,.85); }
+                #sideNav .brand-mini { display: block; width: 100%; text-align: center; font-size: 1.15rem; color: rgba(255,255,255,.85); }
                 #sideNav .navbar-nav, #sideNav .navbar-nav .nav-item { width: 100%; }
-                #sideNav .navbar-nav .nav-item .nav-link { position: relative; text-align: right; padding: .55rem 1.25rem; white-space: nowrap; }
-                #sideNav .nav-ic { display: block; position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font-size: 1.05rem; opacity: 1; transition: opacity .15s ease; }
+                #sideNav .navbar-nav .nav-item .nav-link { position: relative; text-align: center; padding: .55rem .5rem; white-space: nowrap; }
+                #sideNav .nav-ic { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1rem; opacity: 1; transition: opacity .15s ease; }
                 #sideNav .nav-txt { opacity: 0; transition: opacity .25s ease .1s; }
                 #sideNav:hover { width: 17rem; box-shadow: 0 .5rem 2rem rgba(0,0,0,.35); }
                 #sideNav:hover .nav-ic { opacity: 0; }
