@@ -85,6 +85,17 @@ title: "Norman (Xuxi) Guo | SLU"
                     {% endfor %}
                 </div>
             </div>
+            {% if d.research.inProgress %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-3">Selected Work in Progress</h3>
+                    {% for wip in d.research.inProgress %}
+                    <div class="subheading mb-1">{{ wip.title }}</div>
+                    <div class="mb-3">{{ wip.coauthors }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </section>
     <hr class="m-0" />

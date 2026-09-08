@@ -14,13 +14,13 @@ personal:
   location: "Saint Louis, MO 63108"
   email: "norman.guo@slu.edu"
   profileImage: "assets/img/profile.jpg"
-  cv: "assets/pdf/Norman_Guo_CV_20260416.pdf"
+  cv: "assets/pdf/Norman_Guo_CV_20260904.pdf"
 
 about:
-  description: "I am an Assistant Professor of Finance at Saint Loius University. My research broadly focuses on FinTech, Machine Learning, Investment, and Corporate Finance, with a particular interest in uncovering hidden patterns on mutual funds, hedge funds, and financial analysts using explainable machine learning models."
+  description: "I am an Assistant Professor of Finance at Saint Louis University. My research broadly focuses on FinTech, Machine Learning, Investment, and Corporate Finance, with a particular interest in uncovering hidden patterns on mutual funds, hedge funds, and financial analysts using explainable machine learning models."
   researchInterests:
     - "FinTech: AI, Machine Learning, Deep Learning"
-    - "Investments: Hedge Funds, Mutual Funds, Portfolio Managment"
+    - "Investments: Hedge Funds, Mutual Funds, Portfolio Management"
     - "Corporate Finance: Financial Analysts"
 
 socialLinks:
@@ -76,7 +76,7 @@ research:
       description: "This paper uses a sequential deep learning model to uncover and predict dynamic patterns in mutual fund returns. A long-short portfolio based on the model generates a 2.8% annualized four-factor alpha that persists for up to four years."
 
   workingPapers:
-    - title: "Can Machines Understand Human Skills? Insights from Analyst Selection"
+    - title: "Can Machines Understand Analyst Skills?"
       authors:
         - name: "Sean Cao"
           url: "https://sites.google.com/view/seancao/home"
@@ -85,7 +85,7 @@ research:
         - name: "Baozhong Yang"
           url: "https://sites.google.com/view/baozhongyang/"
       paperUrl: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4742174"
-      status: "Revising for invited re-submission at Journal of Finance"
+      status: "Revise & Resubmit, Journal of Finance"
       description: "We use machine learning to identify skilled financial analysts and aggregate their forecasts into a crowd wisdom-based earnings prediction. Machine-selected analysts persistently outperform expert-picked star analysts by leveraging nonlinear interactions of analyst characteristics rather than relation-based information."
 
     - title: "Mapping the Midweek Mountain: The New Geography of Hybrid Work"
@@ -97,7 +97,7 @@ research:
         - name: "Baozhong Yang"
           url: "https://sites.google.com/view/baozhongyang/"
       paperUrl: "assets/pdf/Remote_Work_Paper.pdf"
-      status: "Under submission"
+      status: "Minor revision, Humanities and Social Sciences Communications"
       description: "Using 41 billion mobile geolocation records, we document a lasting post-pandemic shift in work patterns: a 'midweek mountain' of office attendance on Tuesdays through Thursdays, with workers spending significantly more time at non-work locations during the workday."
 
     - title: "The Impact of AI Adoption on Hedge Fund Performance"
@@ -106,16 +106,43 @@ research:
           url: "https://sites.google.com/site/zhenshihome/"
         - name: "Baozhong Yang"
           url: "https://sites.google.com/view/baozhongyang/"
+      paperUrl: "assets/pdf/ML_Hedge_Fund.pdf"
+      status: "Under submission"
       description: "We examine how AI adoption affects hedge fund performance and find that it improves returns by 2.64% annually, reduces risk, and leads to more diversified portfolios with less concentration in local stocks."
+
+    - title: "Machines in the Marketplace of Ideas: Automation and Rent Concentration in Prediction Markets"
+      authors:
+        - name: "Zhen Shi"
+          url: "https://sites.google.com/site/zhenshihome/"
+      description: "Using Polymarket's full trade record of 532 million trades over 40 months, we show that machine-paced trading concentrates where prices can be transported from external betting lines, that its efficiency is real but borrowed, and that its profits concentrate in a handful of operators while the non-machine side pays a zero-sum $137.5 million."
+
+    - title: "Who Gains the Most from AI Accessibility? Evidence from Retail and Institutional Trades"
+      authors:
+        - name: "Sean Cao"
+          url: "https://sites.google.com/view/seancao/home"
+        - name: "Gregory W. Eaton"
+        - name: "Pulak Ghosh"
+        - name: "Jie He"
+        - name: "Xiao Ren"
+      description: "We ask whether the arrival of generative AI narrows or widens the informational gap between retail and institutional investors, comparing trading behavior on both sides of the market around the diffusion of AI tools."
 
     - title: "The Vulnerability Trap: How Sudden Stops Erode Firm Financial Health Through Supply Chain Destruction"
       authors:
         - name: "Anqi Jiao"
           url: "https://sites.google.com/site/anqijiao/home"
+      status: "Under submission"
       description: "We show that sudden stops in international capital flows destroy firms' supply chain networks, creating a vulnerability trap: financially fragile firms suffer the most network damage, which further weakens their financial health and amplifies exposure to future crises."
 
     - title: "Why do actively managed mutual funds hold ETFs? Evidence on liquidity management"
       description: "This paper examines why actively managed mutual funds hold ETFs and finds they serve as a liquidity management tool. Funds using index ETFs maintain performance regardless of investor flow, while non-users suffer lower returns during redemptions."
+
+  inProgress:
+    - title: "The Ripple Effect of Homelessness on Small Businesses and Lending"
+      coauthors: "with Hadiye Aslan and Umut Yildiz"
+    - title: "Career Concerns in Team-Managed Mutual Funds"
+      coauthors: "with Vikas Agarwal, Honglin Ren, and Meng Wang"
+    - title: "Modeling Investors' Voting Behavior Using Graph Neural Networks"
+      coauthors: "with Sijin Wang"
 
 teaching:
   - course: "Introduction to Blockchain and Cryptocurrency"
