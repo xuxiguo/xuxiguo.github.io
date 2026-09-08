@@ -14,7 +14,15 @@ is_blog: true
                 <div class="text-muted mb-2">
                     <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
                     {% if post.categories.size > 0 %}
-                    &middot; {% for cat in post.categories %}<span class="badge bg-primary">{{ cat }}</span> {% endfor %}
+                    &middot;
+                    {% for cat in post.categories %}
+                    {% assign badge = site.data.badge_colors[cat] %}
+                    {% if badge %}
+                    <span class="badge" style="background:{{ badge.bg }};color:{{ badge.color }};border-radius:20px;padding:2px 10px;font-weight:500;">{{ cat }}</span>
+                    {% else %}
+                    <span class="badge" style="background:#F1EFE8;color:#444441;border-radius:20px;padding:2px 10px;font-weight:500;">{{ cat }}</span>
+                    {% endif %}
+                    {% endfor %}
                     {% endif %}
                 </div>
                 {% if post.excerpt %}

@@ -1,6 +1,18 @@
 ---
 layout: default
 ---
+<style>
+.blog-body h2{font-size:1.4rem;font-weight:600;margin:2rem 0 0.6rem;}
+.blog-body h3{font-size:1.2rem;font-weight:600;margin:1.5rem 0 0.5rem;}
+.blog-body h4{font-size:1.05rem;font-weight:600;margin:1.25rem 0 0.4rem;}
+.blog-body p{line-height:1.8;margin-bottom:1rem;}
+.blog-body blockquote{border-left:3px solid #bd5d38;padding-left:1rem;color:#555;font-style:italic;margin:1.5rem 0;}
+.blog-body table{width:100%;margin-bottom:1.25rem;font-size:0.9rem;border-collapse:collapse;}
+.blog-body table th,.blog-body table td{padding:0.5rem 0.75rem;border:1px solid #dee2e6;}
+.blog-body table th{background:#f8f9fa;font-weight:600;}
+.blog-body figure{margin:1.75rem 0;}
+.blog-body figcaption{font-size:0.85rem;color:#666;margin-top:0.4rem;}
+</style>
 <div class="container-fluid p-0">
     <section class="resume-section">
         <div class="resume-section-content blog-content">
@@ -11,7 +23,15 @@ layout: default
             <div class="blog-meta">
                 <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
                 {% if page.categories.size > 0 %}
-                &middot; {% for cat in page.categories %}<span class="badge bg-primary">{{ cat }}</span> {% endfor %}
+                &middot;
+                {% for cat in page.categories %}
+                {% assign badge = site.data.badge_colors[cat] %}
+                {% if badge %}
+                <span class="badge" style="background:{{ badge.bg }};color:{{ badge.color }};border-radius:20px;padding:2px 10px;font-weight:500;">{{ cat }}</span>
+                {% else %}
+                <span class="badge" style="background:#F1EFE8;color:#444441;border-radius:20px;padding:2px 10px;font-weight:500;">{{ cat }}</span>
+                {% endif %}
+                {% endfor %}
                 {% endif %}
             </div>
             <div class="blog-body">

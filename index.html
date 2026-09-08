@@ -26,6 +26,11 @@ title: "Norman (Xuxi) Guo | SLU"
                 </li>
                 {% endfor %}
             </ul>
+            <p class="lead mb-4">
+                I also build what I study: my day-to-day empirical work is run by an
+                <a href="#factory">AI Research Orchestra</a> — 28 specialized agents that carry a paper
+                from idea to journal submission, under my direction.
+            </p>
             <p class="lead mb-5">
                 Download Norman's
                 <a href="{{ d.personal.cv }}">Curriculum Vitae</a>
@@ -80,6 +85,42 @@ title: "Norman (Xuxi) Guo | SLU"
                     {% endfor %}
                 </div>
             </div>
+            {% if d.research.inProgress %}
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-3">Selected Work in Progress</h3>
+                    {% for wip in d.research.inProgress %}
+                    <div class="subheading mb-1">{{ wip.title }}</div>
+                    <div class="mb-3">{{ wip.coauthors }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- AI Research Orchestra -->
+    <section class="resume-section" id="factory">
+        <div class="resume-section-content">
+            <h2 class="mb-3">AI Research Orchestra</h2>
+            <p class="subheading mb-4">28 AI agents &middot; 9 conductors &middot; one principal investigator: you</p>
+            <p class="lead mb-3">Modern AI can draft, code, and analyze &mdash; but left alone in a chat window it
+                forgets your research design, drifts off your question, and agrees with everything you say. The
+                Orchestra is the opposite: a coordinated ensemble of specialized AI agents that runs my entire
+                empirical pipeline &mdash; literature, data, regressions, drafts, referee responses &mdash; under
+                locked research designs, adversarial review, and mandatory stops where the researcher decides. It has
+                run my working papers for the past year, and its core is open source: install it as-is, or use it as
+                the blueprint for conducting an orchestra of your own, in your own field.</p>
+            <ul class="fa-ul mb-4">
+                <li><span class="fa-li"><i class="fas fa-angle-right"></i></span><b>It never loses the thread.</b> Locked charters, decision logs, and belief ledgers carry months of context across every session, crash, and model swap.</li>
+                <li><span class="fa-li"><i class="fas fa-angle-right"></i></span><b>Referee 2, pre-installed.</b> Every design meets a hostile referee before data is pulled, and every draft survives an adversarial review loop before it ever reaches you.</li>
+                <li><span class="fa-li"><i class="fas fa-angle-right"></i></span><b>It learns your field.</b> Each project distills its hard-won lessons into permanent guard skills &mdash; my copy has taught itself 22 and counting.</li>
+                <li><span class="fa-li"><i class="fas fa-angle-right"></i></span><b>You stay the PI.</b> Agents draft, run, and check; nothing locks, ships, or reaches a co-author without your approval.</li>
+            </ul>
+            <p class="mb-0">
+                <a class="btn btn-primary me-2 mb-2" href="{{ '/agents-in-research/' | relative_url }}"><i class="fas fa-robot me-1"></i> Explore the Orchestra</a>
+                <a class="btn btn-outline-primary mb-2" href="https://github.com/xuxiguo/research-factory-claude" target="_blank" rel="noopener"><i class="fab fa-github me-1"></i> Install from GitHub</a>
+            </p>
         </div>
     </section>
     <hr class="m-0" />

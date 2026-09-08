@@ -22,6 +22,52 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap) -->
         <link href="{{ '/css/styles.css' | relative_url }}" rel="stylesheet" />
+        <style>
+            /* One source for the sidebar's vertical rhythm, so the slim reading rail
+               lines up with the full sidebar on the main page. On the main page the
+               brand is a .5rem-padded box holding the profile photo, with a .5rem gap
+               under it: 11.5rem in total, photo centre 5.5rem down from the box top. */
+            :root {
+                --brand-pad: 0.5rem;
+                --brand-photo: 10rem;   /* .img-profile max-height, border included (border-box) */
+                --brand-gap: 0.5rem;    /* the mb-2 under the photo */
+                --brand-box: calc(var(--brand-pad) * 2 + var(--brand-photo) + var(--brand-gap));
+                --brand-centre: calc(var(--brand-pad) + var(--brand-photo) / 2);
+            }
+            .brand-mini { display: none; }
+            .nav-ic { display: none; }
+            @media (min-width: 992px) {
+                #sideNav .navbar-nav .nav-item .nav-link { white-space: nowrap; }
+            }
+        </style>
+        {% if page.layout == 'post' or page.is_blog or page.slim_nav %}
+        <style>
+            /* Slim sidebar for reading pages: icon rail, cross-fades to text-only on hover, no photo */
+            @media (min-width: 992px) {
+                body { padding-left: 3.6rem; }
+                #sideNav { width: 3.6rem; transition: width .25s ease; overflow: hidden; }
+                /* Keep the auto top margin and the same box height as the photo on the
+                   main page: margin:0 used to pin the brand to the very top of the rail,
+                   which is why the home icon and every nav link below it sat higher here
+                   than on the main page. */
+                #sideNav .navbar-brand { display: block; width: 100%; margin: auto auto 0; padding: var(--brand-pad); height: var(--brand-box); position: relative; }
+                #sideNav .navbar-brand > span.d-none.d-lg-block { display: none !important; }
+                #sideNav .brand-mini { display: block; position: absolute; left: 50%; top: var(--brand-centre); transform: translate(-50%, -50%); font-size: 1.1rem; color: rgba(255,255,255,.85); }
+                #sideNav .navbar-nav, #sideNav .navbar-nav .nav-item { width: 100%; }
+                /* .5rem vertical padding matches Bootstrap's default on the main page, so
+                   the links keep the same spacing and land at the same heights. */
+                #sideNav .navbar-nav .nav-item .nav-link { position: relative; text-align: center; padding: .5rem; white-space: nowrap; }
+                #sideNav .nav-ic { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1rem; opacity: 1; transition: opacity .15s ease; }
+                #sideNav .nav-txt { opacity: 0; transition: opacity .25s ease .1s; }
+                #sideNav:hover { width: 17rem; box-shadow: 0 .5rem 2rem rgba(0,0,0,.35); }
+                #sideNav:hover .nav-ic { opacity: 0; }
+                #sideNav:hover .nav-txt { opacity: 1; }
+                /* center the reading column in the width the slim rail frees up */
+                section.resume-section { margin-left: auto; margin-right: auto; }
+                .blog-content { margin-left: auto; margin-right: auto; }
+            }
+        </style>
+        {% endif %}
         {% if page.layout == 'post' or page.is_blog %}
         <style>
             .blog-content { max-width: 800px; }
@@ -43,6 +89,7 @@
             <a class="navbar-brand{% if page.is_home %} js-scroll-trigger{% endif %}" href="{% if page.is_home %}#page-top{% else %}{{ '/' | relative_url }}{% endif %}">
                 <span class="d-block d-lg-none">{{ site.data.content.personal.displayName }}</span>
                 <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ '/' | relative_url }}{{ site.data.content.personal.profileImage }}" alt="..." /></span>
+                <span class="brand-mini"><i class="fas fa-home"></i></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -50,14 +97,14 @@
                     {% for item in site.data.content.navigation %}
                     <li class="nav-item">
                         {% if page.is_home %}
-                        <a class="nav-link js-scroll-trigger" href="#{{ item.id }}">{{ item.label }}</a>
+                        <a class="nav-link js-scroll-trigger" href="#{{ item.id }}">{% if item.icon %}<i class="nav-ic {{ item.icon }}"></i>{% endif %}<span class="nav-txt">{{ item.label }}</span></a>
                         {% else %}
-                        <a class="nav-link" href="{{ '/' | relative_url }}#{{ item.id }}">{{ item.label }}</a>
+                        <a class="nav-link" href="{{ '/' | relative_url }}#{{ item.id }}">{% if item.icon %}<i class="nav-ic {{ item.icon }}"></i>{% endif %}<span class="nav-txt">{{ item.label }}</span></a>
                         {% endif %}
                     </li>
                     {% endfor %}
                     <li class="nav-item">
-                        <a class="nav-link{% if page.is_blog or page.layout == 'post' %} active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
+                        <a class="nav-link{% if page.is_blog or page.layout == 'post' %} active{% endif %}" href="{{ '/blog/' | relative_url }}"><i class="nav-ic fas fa-pen-nib"></i><span class="nav-txt">Blog</span></a>
                     </li>
                 </ul>
             </div>

@@ -24,6 +24,11 @@ MIGRATION_COMPLETE.md
 website.code-workspace
 .specstory/
 
+# Secrets — NEVER commit (GitHub PAT used by publish_blog.py)
+github-token.txt
+*.token
+*.pem
+
 # System files
 .DS_Store
 Thumbs.db
